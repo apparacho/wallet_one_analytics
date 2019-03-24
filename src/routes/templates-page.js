@@ -17,6 +17,7 @@ class TemplatesPage extends Component {
                         <Route path="/templates/edit" component={TemplateEditPage} />
                         <Route path="/templates" component={TemplateListPage} />
                         <Redirect to="/templates" />
+                        <Route component={TemplateListPage} />
                     </Switch>
                 </section>
             </Fragment>
