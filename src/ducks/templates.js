@@ -62,7 +62,7 @@ export const fetchAllTemplates = () => {
  * */
 
 export function loadAllTemplatesService () {
-    return axios.get('/templates')
+    return axios.get('/Templates')
         .then(function (response) {
             return response.data;
         })
