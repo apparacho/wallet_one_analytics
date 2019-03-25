@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "admin-lte": "^2.4.10",
+    "antd": "^3.15.2",
     "axios": "^0.18.0",
     "connected-react-router": "^6.3.2",
     "history": "^4.9.0",

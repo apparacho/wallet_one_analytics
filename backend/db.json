@@ -42,6 +42,74 @@
       "user": null,
       "reportingSystemId": "48a96857-0c53-431e-886a-886b65b81e98",
       "userId": "bd504b3f-81fe-42ca-b966-675515b07af9"
+    },
+    {
+      "id": "cad7f0f5-6026-4424-9b72-222222222",
+      "name": "test template 2",
+      "templateType": 0,
+      "templateColumns": [
+        {
+          "name": "DealSum",
+          "humanReadableName": "Сумма сделки",
+          "dataType": 1
+        },
+        {
+          "name": "PointTransactionLimit",
+          "humanReadableName": "Лимит точки",
+          "dataType": 1
+        },
+        {
+          "name": "PointId",
+          "humanReadableName": "PointId",
+          "dataType": 0
+        },
+        {
+          "name": "DealState",
+          "humanReadableName": "DealState",
+          "dataType": 0
+        },
+        {
+          "name": "LicenseId",
+          "humanReadableName": "LicenseId",
+          "dataType": 0
+        },
+        {
+          "name": "DealNumber",
+          "humanReadableName": "DealNumber",
+          "dataType": 0
+        },
+        {
+          "name": "LicenseeId",
+          "humanReadableName": "LicenseeId",
+          "dataType": 0
+        }
+      ],
+      "filters": [
+        {
+          "operation": 6,
+          "column": {
+            "name": "PointTransactionLimit",
+            "humanReadableName": null,
+            "dataType": 1
+          },
+          "boundValue": 1
+        }
+      ],
+      "aggregationFunctions": [
+        {
+          "type": 0,
+          "column": {
+            "name": "DealSum",
+            "humanReadableName": "Сумма сделки",
+            "dataType": 1
+          },
+          "name": null
+        }
+      ],
+      "reportingSystem": null,
+      "user": null,
+      "reportingSystemId": "48a96857-0c53-431e-886a-886b65b81e98",
+      "userId": "bd504b3f-81fe-42ca-b966-675515b07af9"
     }
   ]
 }

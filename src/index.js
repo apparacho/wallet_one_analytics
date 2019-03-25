@@ -13,6 +13,8 @@ import 'admin-lte/bower_components/Ionicons/css/ionicons.css'
 import 'admin-lte/dist/css/AdminLTE.css'
 import 'admin-lte/dist/css/skins/_all-skins.css'
 
+import 'antd/dist/antd.css'
+
 setHttpRequestsDefault()
 
 ReactDOM.render(

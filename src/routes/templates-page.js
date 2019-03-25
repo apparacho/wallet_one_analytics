@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import TemplateEditPage from '../components/templates/template-edit-page'
-import TemplateListPage from '../components/templates/templates-list-page'
+import TemplateEditPage from '../components/reporttemplates/template-edit-page'
+import TemplateListPage from '../components/reporttemplates/templates-list-page'
 
 class TemplatesPage extends Component {
     static propTypes = {}
