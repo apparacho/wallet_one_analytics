@@ -3,6 +3,7 @@ const server = jsonServer.create()
 const path = require('path')
 const router = jsonServer.router(path.join(__dirname, 'db.json'))
 const middlewares = jsonServer.defaults()
+const bodyParser = require("body-parser");
 
 const port = 8080
 
@@ -13,8 +14,18 @@ server.get('/echo', (req, res) => {
 })
 
 server.use(jsonServer.rewriter({
-    '/api/*': '/$1'
+    '/api/*': '/$1',
+    '/Templates/new_template_data': '/newTemplateData'
 }))
+
+server.use(bodyParser.json());
+server.post('/Templates', (req, res) => {
+    console.log(req)
+    console.log(req.body)
+    return res.jsonp({
+        success: true
+    })
+})
 
 
 server.use(router)

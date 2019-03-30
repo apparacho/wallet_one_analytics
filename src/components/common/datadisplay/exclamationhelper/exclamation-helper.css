@@ -1,0 +1,8 @@
+.fa.wo-exclamation-helper-icon {
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+.wo-exclamation-helper-icon.error {
+    color: red;
+}

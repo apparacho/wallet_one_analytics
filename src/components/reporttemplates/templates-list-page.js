@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { templatesSelector, fetchAllTemplates } from '../../ducks/templates'
+import { templateListSelector, fetchTemplatesList } from '../../ducks/templates'
 import TemplatesTable from './templates-table'
 import { NavLink } from 'react-router-dom'
 import { Button } from 'antd'
@@ -9,7 +9,7 @@ class TemplateListPage extends Component {
     static propTypes = {}
 
     componentDidMount() {
-      this.props.fetchAllTemplates()
+        this.props.fetchTemplatesList()
     }
 
     render() {
@@ -22,7 +22,7 @@ class TemplateListPage extends Component {
                         <Button style={{ float: 'right' }} > Новый шаблон </Button>
                     </NavLink>
                 </div>
-                <TemplatesTable tableData={this.props.templates} style={{ marginTop: '20px' }} />
+                <TemplatesTable tableData={this.props.templateList} style={{ marginTop: '20px' }} />
 
             </Fragment>
           )
@@ -31,7 +31,7 @@ class TemplateListPage extends Component {
 
 export default connect(
     (state) => ({
-        templates: templatesSelector(state)
+        templateList: templateListSelector(state)
     }),
-    { fetchAllTemplates }
+    { fetchTemplatesList }
 )(TemplateListPage)

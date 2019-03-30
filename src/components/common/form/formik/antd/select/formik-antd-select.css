@@ -1,0 +1,4 @@
+
+.wo-select.error>.ant-select-selection {
+    border-color: red;
+}
