@@ -66,8 +66,8 @@ stages:
   when: manual
 
 # Jobs
-build_image:
-  <<: *build_image
+build dev:
+  <<: *build
   script:
     - docker build -t ${PROJECT_NAMESPACE}_${PROJECT_NAME} -f Dockerfile --build-arg REACT_APP_BASE_URL=http://172.17.14.98:2001/api .
     - docker tag ${PROJECT_NAMESPACE}_${PROJECT_NAME} $CI_REGISTRY_IMAGE:$ENV_VERSION
