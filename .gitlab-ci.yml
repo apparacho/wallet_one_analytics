@@ -69,8 +69,8 @@ stages:
 build dev:
   <<: *build
   script:
-    - docker build -t ${PROJECT_NAMESPACE}_${PROJECT_NAME} -f Dockerfile --build-arg REACT_APP_BASE_URL=http://172.17.14.98:2001/api .
-    - docker tag ${PROJECT_NAMESPACE}_${PROJECT_NAME} $CI_REGISTRY_IMAGE:$ENV_VERSION
+    - docker build -t ${PROJECT_STACK}_${PROJECT_NAME} -f Dockerfile --build-arg REACT_APP_BASE_URL=http://172.17.14.98:2001/api .
+    - docker tag ${PROJECT_STACK}_${PROJECT_NAME} $CI_REGISTRY_IMAGE:$ENV_VERSION
     - docker push $CI_REGISTRY_IMAGE:$ENV_VERSION
   only:
     - develop
