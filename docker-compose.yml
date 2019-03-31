@@ -1,0 +1,15 @@
+version: "3.6"
+
+services:
+  frontend:
+    container_name: analytics_frontend
+    image: registry.w1.money/analyticalreports/frontend:develop
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_BASE_URL: http://localhost:8080/api
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend_logs:/var/log/nginx

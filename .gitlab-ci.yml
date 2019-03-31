@@ -1,0 +1,87 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  MATTERMOST_URL: https://mattermost.w1.money/hooks
+  IAC_API_URL: https://gitlab.w1.money/api/v4/projects/$IAC_ID/trigger/pipeline
+  MATTERMOST_HOOK: TODO
+  IAC_ID: TODO
+  IAC_URL: TODO
+
+stages:
+  - build
+  - approve_dev
+#  - approve_test
+#  - approve_stage
+#  - approve_prod
+
+# multi-line script
+.docker_tag: &docker_tag |
+  if [ "$CI_BUILD_REF_NAME" == "master" ]
+  then
+    export ENV_VERSION=latest
+  else
+    export ENV_VERSION=$CI_BUILD_REF_NAME
+  fi
+
+.project_naming: &project_naming |
+  export PROJECT_STACK=`echo "$CI_PROJECT_NAMESPACE" | tr '[:upper:]' '[:lower:]' `
+  export PROJECT_NAME=`echo "$CI_PROJECT_NAME" | tr '[:upper:]' '[:lower:]' `
+  export ANSIBLE_VARS=${PROJECT_STACK}_${PROJECT_NAME}_version
+
+.approve_curl: &approve_curl |
+  export CONTENT=$(curl -X POST --form token=$IAC_TOKEN --form variables[DEPLOY_AUTHOR]=$GITLAB_USER_LOGIN --form variables[DEPLOY_PROJECT_STACK]=$PROJECT_STACK --form variables[DEPLOY_PROJECT_STAND]=$DEPLOY_ENV --form ref=master --form variables[DEPLOY_PROJECT_NAME]=$PROJECT_NAME --form variables[DEPLOY_PROJECT_VARS]=$ANSIBLE_VARS --form variables[DEPLOY_PROJECT_VERSION]=$ENV_VERSION ${IAC_API_URL})
+  export PIPELINE_ID=$( echo ${CONTENT} | jq ".id" )
+  export TEXT="Создана задача на деплой стека $PROJECT_STACK для проекта $PROJECT_NAME версии $ENV_VERSION на стенд $DEPLOY_ENV - $IAC_URL/$PIPELINE_ID"
+  export JSON="{\"channel\": \"operation\",  \"username\":\"$GITLAB_USER_LOGIN\", \"text\": \"$TEXT\"}"
+#  curl -s -d "payload=${JSON}" ${MATTERMOST_URL}/${MATTERMOST_HOOK}
+
+# template
+.build: &build
+  stage: build
+  tags: [docker]
+  image: docker:latest
+  services:
+    - docker:1.12.1-dind
+  before_script:
+    - "docker login -u $CI_REGISTRY_USER -p $CI_BUILD_TOKEN $CI_REGISTRY"
+    - *docker_tag
+    - *project_naming
+  script:
+    - echo ""
+  after_script:
+    - docker logout $CI_REGISTRY
+  only:
+    - random
+
+.approve: &approve
+  stage: approve_dev
+  image: registry.w1.money/devops/image/curl:v1.1.0
+  tags: [docker]
+  before_script:
+    - *docker_tag
+    - *project_naming
+  script:
+    - *approve_curl
+  only:
+    - random
+  when: manual
+
+# Jobs
+build_image:
+  <<: *build_image
+  script:
+    - docker build -t ${PROJECT_NAMESPACE}_${PROJECT_NAME} -f Dockerfile --build-arg REACT_APP_BASE_URL=http://172.17.14.98:2001/api .
+    - docker tag ${PROJECT_NAMESPACE}_${PROJECT_NAME} $CI_REGISTRY_IMAGE:$ENV_VERSION
+    - docker push $CI_REGISTRY_IMAGE:$ENV_VERSION
+  only:
+    - develop
+
+approve in dev:
+  <<: *approve
+  variables:
+    DEPLOY_ENV: dev
+    IAC_ID: 479
+    IAC_URL: https://gitlab.w1.money/DevOps/Tools/devops-iac/pipelines
+    IAC_TOKEN: $DEVOPS_IAC_TOKEN
+    MATTERMOST_HOOK: 7n6sz8q6rbbhirhyf16j6i7k3y
+  only:
+    - develop
