@@ -15,7 +15,7 @@ import {connect} from "react-redux";
 const fieldRequiredMessage = 'это поле обязательно для заполнения'
 
 const addTemplateValidationSchema = Yup.object().shape({
-    templateName: Yup.string().required(fieldRequiredMessage),
+    name: Yup.string().required(fieldRequiredMessage),
     templateType: Yup.string().required(fieldRequiredMessage),
     reportingSystemId: Yup.string().required(fieldRequiredMessage),
     templateColumns: Yup.array().required(fieldRequiredMessage)
@@ -31,7 +31,7 @@ const FormFieldWithLabel = ({label, children}) => (
 class TemplateEditForm extends PureComponent {
 
     static propTypes = {
-        templateName: PropTypes.string,
+        name: PropTypes.string,
         templateType: PropTypes.string,
         reportingSystemId: PropTypes.string,
         templateColumns: PropTypes.array,
@@ -42,7 +42,7 @@ class TemplateEditForm extends PureComponent {
     }
 
     static defaultProps = {
-        templateName: '',
+        name: '',
         templateType: '',
         reportingSystemId: '',
         templateColumns: [],
@@ -57,7 +57,8 @@ class TemplateEditForm extends PureComponent {
     }
 
     handleSubmit = (values) => {
-        this.props.addNewTemplate(Object.assign({}, values, { filters: [], aggregationFunctions: [] }))
+        this.props.addNewTemplate(Object.assign({}, values, {templateColumns: this.props.templateColumnsSelectData.filter(column => values.templateColumns.indexOf(column.name) !== -1)}))
+        console.log(values);
     }
 
     render() {
@@ -65,7 +66,7 @@ class TemplateEditForm extends PureComponent {
         return (
             <Formik key={Date.now()}
                 initialValues={{
-                    templateName: this.props.templateName,
+                    name: this.props.name,
                     templateType: this.props.templateType,
                     reportingSystemId: this.props.reportingSystemId,
                     templateColumns: this.props.templateColumns
@@ -80,8 +81,8 @@ class TemplateEditForm extends PureComponent {
                         <FormFieldWithLabel label='Название шаблона' >
                             <FormikAntdInput
                                 formikProps={props}
-                                name="templateName"
-                                dataIndex="templateName"
+                                name="name"
+                                dataIndex="name"
                                 type="text"
                                 placeholder="Укажите название шаблона"
                                 style={{ width: 300 }}

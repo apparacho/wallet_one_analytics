@@ -18,14 +18,32 @@ server.use(jsonServer.rewriter({
     '/Templates/new_template_data': '/newTemplateData'
 }))
 
-server.use(bodyParser.json());
-server.post('/Templates', (req, res) => {
-    console.log(req)
-    console.log(req.body)
-    return res.jsonp({
-        success: true
-    })
-})
+// server.use(bodyParser.json());
+// server.post('/Templates', (req, res) => {
+//     console.log(req)
+//     console.log(req.body)
+//
+//     return res.jsonp({ success: true })
+// })
+
+// const newTemplate = {
+//   "id": Date.now(),
+//   "name": "test template 2",
+//   "templateType": 0,
+//   "templateColumns": [
+//     {
+//       "name": "DealSum",
+//       "humanReadableName": "Сумма сделки",
+//       "dataType": 1
+//     }
+//   ],
+//   "filters": [],
+//   "aggregationFunctions": [],
+//   "reportingSystem": null,
+//   "user": null,
+//   "reportingSystemId": "8a96857-0c53-431e-886a-886b65b81e98",
+//   "userId": "bd504b3f-81fe-42ca-b966-675515b07af9"
+// }
 
 
 server.use(router)

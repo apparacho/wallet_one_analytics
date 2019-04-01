@@ -35,6 +35,24 @@ const initState = {
     successfulTemplateAdd: false
 }
 
+const defaultTemplateStructure = {
+  "name": "test template",
+  "templateType": 0,
+  "templateColumns": [
+    {
+      "name": "DealSum",
+      "humanReadableName": "Сумма сделки",
+      "dataType": 1
+    }
+  ],
+  "filters": [],
+  "aggregationFunctions": [],
+  "reportingSystem": null,
+  "user": null,
+  "reportingSystemId": "8a96857-0c53-431e-886a-886b65b81e98",
+  "userId": "bd504b3f-81fe-42ca-b966-675515b07af9"
+}
+
 export default function reducer(state = initState, action) {
   const { type, payload } = action
 
@@ -128,7 +146,7 @@ export function loadNewTemplateCreationDataService () {
 }
 
 export function addNewTemplateService (params) {
-    return axios.post('/Templates/', params)
+    return axios.post('/Templates/', Object.assign({}, defaultTemplateStructure, params))
         .then(function (response) {
             return response.data;
         })
