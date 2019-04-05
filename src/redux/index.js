@@ -9,8 +9,8 @@ const enhancer = applyMiddleware(thunk, routerMiddleware(history), logger)
 
 const store = createStore(createRootReducer(history), enhancer)
 
-// dev
-window.store = store
-//
+if (process.env.NODE_ENV === 'development') {
+    window.store = store
+}
 
 export default store

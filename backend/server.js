@@ -15,7 +15,8 @@ server.get('/echo', (req, res) => {
 
 server.use(jsonServer.rewriter({
     '/api/*': '/$1',
-    '/Templates/new_template_data': '/newTemplateData'
+    '/Templates/new_template_data': '/newTemplateData',
+    '/Reports/*': '/getReportData'
 }))
 
 // server.use(bodyParser.json());

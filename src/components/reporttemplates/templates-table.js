@@ -22,7 +22,7 @@ class TemplatesTable extends Component {
 
     render() {
         return (
-            <Table style={{ backgroundColor: '#fff'}} pagination={false} columns={columns} dataSource={this.props.tableData.map((row, i) => ({...row, key: i}))} />
+            <Table style={{ backgroundColor: '#fff'}} pagination={false} columns={columns} dataSource={this.props.tableData} />
           )
     }
 }
