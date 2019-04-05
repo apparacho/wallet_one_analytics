@@ -20,7 +20,7 @@ class ReportView extends Component {
         const columns = this.props.report.reportData.tableColumns.map(col => ({ dataIndex: col.name, title: col.humanReadableName }))
         return (
             <div>
-                Report View
+                <h4>{this.props.report.name}</h4>
                 <Table style={{ backgroundColor: '#fff'}}  columns={columns} dataSource={addIdByIndex(this.props.report.reportData.table)} />
             </div>
           )
