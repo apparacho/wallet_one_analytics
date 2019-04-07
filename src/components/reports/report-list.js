@@ -2,12 +2,26 @@ import React, { Component } from 'react'
 import ReportTable from './reports-table'
 import { connect } from 'react-redux'
 import { reportListSelector, fetchAllReports } from '../../ducks/reports'
+import { Button } from 'antd'
+import AddReportModal from './add-report-modal'
 
 class ReportList extends Component {
     static propTypes = {}
 
-     componentDidMount() {
+    state = {
+        isVisibleModal: false
+    }
+
+    componentDidMount() {
         this.props.fetchAllReports()
+    }
+
+    showModal = () => {
+        this.setState({ isVisibleModal: true })
+    }
+
+    hideModal = () => {
+         this.setState({ isVisibleModal: false })
     }
 
     render() {
@@ -16,8 +30,15 @@ class ReportList extends Component {
                 <br/>
                 <div style={{ width: '100%', marginBottom: '10px'}}>
                     <span style={{ fontSize: '18px', lineHeight: '32px' }} > Список отчетов </span>
+                    <Button style={{ float: 'right' }} onClick={this.showModal}> Сгенерировать отчет </Button>
                 </div>
                 <ReportTable tableData={this.props.reportList} />
+
+                <AddReportModal
+                    visible={this.state.isVisibleModal}
+                    onCancel={this.hideModal}
+                    onSuccess={this.hideModal}
+                />
             </div>
           )
     }
