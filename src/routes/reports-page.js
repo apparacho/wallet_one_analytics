@@ -14,7 +14,7 @@ class ReportsPage extends Component {
                 </section>
                 <section className="content">
                     <Switch>
-                        <Route path={`${this.props.match.path}/:id([0-9]+)`} component={ReportView} />
+                        <Route path={`${this.props.match.path}/:id`} component={ReportView} />
                         <Route path={this.props.match.path} component={ReportList} />
                         <Redirect to={this.props.match.path} />
                     </Switch>
