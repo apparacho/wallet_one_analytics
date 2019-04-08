@@ -32,11 +32,11 @@
     "name": "Test Report 1",
     "templateColumns": [
         {
-          "name": "DealSum",
+          "columnName": "DealSum",
           "humanReadableName": "DealSum"
         },
         {
-          "name": "PointTransactionLimit",
+          "columnName": "PointTransactionLimit",
           "humanReadableName": "PointTransactionLimit"
         }
       ],
