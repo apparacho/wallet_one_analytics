@@ -16,7 +16,7 @@ class ReportView extends Component {
     }
 
     render() {
-        const columns = this.props.report.reportData.tableColumns.map(col => ({ dataIndex: col.name, title: col.humanReadableName }))
+        const columns = this.props.report.templateColumns.map(col => ({ dataIndex: col.name, title: col.humanReadableName }))
         return (
             <div>
                 <h4>{this.props.report.name}</h4>
@@ -24,7 +24,7 @@ class ReportView extends Component {
                     style={{ backgroundColor: '#fff'}}
                     pagination={{size: "small", showSizeChanger: true }}
                     columns={columns}
-                    dataSource={addIdByIndex(this.props.report.reportData.table)} />
+                    dataSource={addIdByIndex(this.props.report.table)} />
             </div>
           )
     }

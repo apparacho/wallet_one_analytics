@@ -29,11 +29,9 @@ const initState = {
         templateName: '',
         content: '',
         name: '',
-        reportData: {
-            tableColumns: [],
-            table: [],
-            indicators: []
-        }
+        templateColumns: [],
+        table: [],
+        indicators: []
     },
     loading: false,
     generatingNewReport: false

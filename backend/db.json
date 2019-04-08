@@ -30,8 +30,7 @@
     "templateName": "test template 1",
     "content": "string",
     "name": "Test Report 1",
-    "reportData": {
-      "tableColumns": [
+    "templateColumns": [
         {
           "name": "DealSum",
           "humanReadableName": "DealSum"
@@ -41,159 +40,158 @@
           "humanReadableName": "PointTransactionLimit"
         }
       ],
-      "table": [
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.012,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.012,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.017,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.017,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.031,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 11,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 69,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 69,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 123,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 123,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.011,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.012,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.012,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.017,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.017,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 0.031,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 11,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 69,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 69,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 123,
-          "PointTransactionLimit": 0
-        },
-        {
-          "DealSum": 123,
-          "PointTransactionLimit": 0
-        }
-      ],
-      "indicators": [
-        {
-          "name": "Минимальная сумма сделки",
-          "value": 0.011
-        }
-      ]
-    }
+    "table": [
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.012,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.012,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.017,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.017,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.031,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 11,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 69,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 69,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 123,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 123,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.011,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.012,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.012,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.017,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.017,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 0.031,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 11,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 69,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 69,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 123,
+        "PointTransactionLimit": 0
+      },
+      {
+        "DealSum": 123,
+        "PointTransactionLimit": 0
+      }
+    ],
+    "indicators": [
+      {
+        "name": "Минимальная сумма сделки",
+        "value": 0.011
+      }
+    ]
   },
   "Templates": [
     {
