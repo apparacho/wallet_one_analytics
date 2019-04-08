@@ -5,6 +5,7 @@ variables:
   MATTERMOST_HOOK: TODO
   IAC_ID: TODO
   IAC_URL: TODO
+  REF_NAME: master
 
 stages:
   - build
@@ -28,7 +29,7 @@ stages:
   export ANSIBLE_VARS=${PROJECT_STACK}_${PROJECT_NAME}_version
 
 .approve_curl: &approve_curl |
-  export CONTENT=$(curl -X POST --form token=$IAC_TOKEN --form variables[DEPLOY_AUTHOR]=$GITLAB_USER_LOGIN --form variables[DEPLOY_PROJECT_STACK]=$PROJECT_STACK --form variables[DEPLOY_PROJECT_STAND]=$DEPLOY_ENV --form ref=master --form variables[DEPLOY_PROJECT_NAME]=$PROJECT_NAME --form variables[DEPLOY_PROJECT_VARS]=$ANSIBLE_VARS --form variables[DEPLOY_PROJECT_VERSION]=$ENV_VERSION ${IAC_API_URL})
+  export CONTENT=$(curl -X POST --form token=$IAC_TOKEN --form variables[DEPLOY_AUTHOR]=$GITLAB_USER_LOGIN --form variables[DEPLOY_PROJECT_STACK]=$PROJECT_STACK --form variables[DEPLOY_PROJECT_STAND]=$DEPLOY_ENV --form ref=$REF_NAME --form variables[DEPLOY_PROJECT_NAME]=$PROJECT_NAME --form variables[DEPLOY_PROJECT_VARS]=$ANSIBLE_VARS --form variables[DEPLOY_PROJECT_VERSION]=$ENV_VERSION ${IAC_API_URL})
   export PIPELINE_ID=$( echo ${CONTENT} | jq ".id" )
   export TEXT="Создана задача на деплой стека $PROJECT_STACK для проекта $PROJECT_NAME версии $ENV_VERSION на стенд $DEPLOY_ENV - $IAC_URL/$PIPELINE_ID"
   export JSON="{\"channel\": \"operation\",  \"username\":\"$GITLAB_USER_LOGIN\", \"text\": \"$TEXT\"}"
@@ -83,5 +84,6 @@ approve in dev:
     IAC_URL: https://gitlab.w1.money/DevOps/Tools/devops-iac/pipelines
     IAC_TOKEN: $DEVOPS_IAC_TOKEN
     MATTERMOST_HOOK: 7n6sz8q6rbbhirhyf16j6i7k3y
+    REF_NAME: swarm
   only:
     - develop
