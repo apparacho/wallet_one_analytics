@@ -29,8 +29,8 @@ const addTemplateValidationSchema = Yup.object().shape({
     })),
     templateColumnAggregationFunctions: Yup.array().of(Yup.object().shape({
         column: Yup.string().required(fieldRequiredMessage),
-        operation: Yup.string().required(fieldRequiredMessage),
-        boundValue: Yup.string().required(fieldRequiredMessage)
+        type: Yup.string().required(fieldRequiredMessage),
+        name: Yup.string().required(fieldRequiredMessage)
     }))
 })
 
@@ -350,21 +350,21 @@ class TemplateEditForm extends PureComponent {
 
                                                 <td>
                                                     <Field
-                                                        name={`templateColumnAggregationFunctions[${index}].operation`}
+                                                        name={`templateColumnAggregationFunctions[${index}].type`}
                                                         render={({ field }) => (
                                                             <div style={{ display: 'inline-block', marginBottom: '10px' }}>
                                                                  <div style={{ display: 'inline-block' }}>
                                                                      <Select
                                                                          {...field}
-                                                                         name={`templateColumnAggregationFunctions[${index}].operation`}
-                                                                         value={props.values['templateColumnAggregationFunctions'][index]['operation']}
-                                                                         onChange={(val) => props.setFieldValue(`templateColumnAggregationFunctions[${index}].operation`, val)}
-                                                                         onBlur={() => props.setFieldTouched(`templateColumnAggregationFunctions[${index}].operation`, true)}
+                                                                         name={`templateColumnAggregationFunctions[${index}].type`}
+                                                                         value={props.values['templateColumnAggregationFunctions'][index]['type']}
+                                                                         onChange={(val) => props.setFieldValue(`templateColumnAggregationFunctions[${index}].type`, val)}
+                                                                         onBlur={() => props.setFieldTouched(`templateColumnAggregationFunctions[${index}].type`, true)}
                                                                          style={{ width: 200 }}
                                                                          className={
                                                                              'wo-select' +
-                                                                             (props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['operation']
-                                                                                && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['operation'] ? ' error' : '')
+                                                                             (props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['type']
+                                                                                && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['type'] ? ' error' : '')
                                                                          }
                                                                      >
                                                                          {
@@ -376,9 +376,9 @@ class TemplateEditForm extends PureComponent {
                                                                      </Select>
                                                                  </div>
                                                                  <div style={{ display: 'inline-block', width: 20 }} >
-                                                                     {props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['operation']
-                                                                        && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['operation'] && (
-                                                                         <ExclamationHelper type='error' title={props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index]['operation']} />
+                                                                     {props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['type']
+                                                                        && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['type'] && (
+                                                                         <ExclamationHelper type='error' title={props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index]['type']} />
                                                                      )}
                                                                  </div>
                                                             </div>
@@ -388,7 +388,7 @@ class TemplateEditForm extends PureComponent {
 
                                                 <td>
                                                     <Field
-                                                        name={`templateColumnAggregationFunctions[${index}].boundValue`}
+                                                        name={`templateColumnAggregationFunctions[${index}].name`}
                                                         render={({ field }) => (
                                                             <div style={{ display: 'inline-block', marginBottom: '10px' }}>
                                                                 <div style={{ display: 'inline-block' }}>
@@ -399,14 +399,14 @@ class TemplateEditForm extends PureComponent {
                                                                         style={{ width: 200 }}
                                                                         className={
                                                                             'wo-input' +
-                                                                            (props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['boundValue']
-                                                                            && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['boundValue']? ' error' : '')}
+                                                                            (props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['name']
+                                                                            && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['name']? ' error' : '')}
                                                                     />
                                                                 </div>
                                                                 <div style={{ display: 'inline-block', width: 20 }} >
-                                                                    {props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['boundValue']
-                                                                        && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['boundValue'] && (
-                                                                        <ExclamationHelper type='error' title={props.errors['templateColumnAggregationFunctions'][index]['boundValue']} />
+                                                                    {props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['name']
+                                                                        && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['name'] && (
+                                                                        <ExclamationHelper type='error' title={props.errors['templateColumnAggregationFunctions'][index]['name']} />
                                                                     )}
                                                                 </div>
                                                             </div>
@@ -427,7 +427,7 @@ class TemplateEditForm extends PureComponent {
 
                                     <Button
                                         type="button"
-                                        onClick={() => arrayHelpers.push({ column: '', operation: '', boundValue: '' })}
+                                        onClick={() => arrayHelpers.push({ column: '', type: '', name: '' })}
                                     >
                                         Добавить показатель
                                     </Button>
