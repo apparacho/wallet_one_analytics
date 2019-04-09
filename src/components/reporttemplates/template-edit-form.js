@@ -224,8 +224,8 @@ class TemplateEditForm extends PureComponent {
                                                                      >
                                                                          {
                                                                               this.props.templateColumnsSelectData.filter(col => col.name === props.values['templateColumnFilters'][index]['column'])[0]
-                                                                    && this.props.templateColumnsSelectData.filter(col => col.name === props.values['templateColumnFilters'][index]['column'])[0].dataType.value &&
-                                                                             this.props.dataTypeDescriptions.filter(dataType => dataType.value === this.props.templateColumnsSelectData.filter(col => col.name === props.values['templateColumnFilters'][index]['column'])[0].dataType.value)[0].operations.map(op =>
+                                                                    && this.props.templateColumnsSelectData.filter(col => col.name === props.values['templateColumnFilters'][index]['column'])[0].dataType &&
+                                                                             this.props.dataTypeDescriptions.filter(dataType => dataType.value === this.props.templateColumnsSelectData.filter(col => col.name === props.values['templateColumnFilters'][index]['column'])[0].dataType)[0].operations.map(op =>
                                                                              <Option key={op['value']} value={op['value']}>{op['name']}</Option>
                                                                          )}
                                                                      </Select>
