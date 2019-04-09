@@ -26,6 +26,11 @@ const addTemplateValidationSchema = Yup.object().shape({
         column: Yup.string().required(fieldRequiredMessage),
         operation: Yup.string().required(fieldRequiredMessage),
         boundValue: Yup.string().required(fieldRequiredMessage)
+    })),
+    templateColumnAggregationFunctions: Yup.array().of(Yup.object().shape({
+        column: Yup.string().required(fieldRequiredMessage),
+        operation: Yup.string().required(fieldRequiredMessage),
+        boundValue: Yup.string().required(fieldRequiredMessage)
     }))
 })
 
@@ -44,7 +49,7 @@ class TemplateEditForm extends PureComponent {
         reportingSystemId: PropTypes.string,
         templateColumns: PropTypes.array,
         templateColumnFilters: PropTypes.array,
-        templateColumnOperations: PropTypes.array,
+        templateColumnAggregationFunctions: PropTypes.array,
 
         templateTypesSelectData: PropTypes.array,
         reportingSystemsSelectData: PropTypes.array,
@@ -57,7 +62,7 @@ class TemplateEditForm extends PureComponent {
         reportingSystemId: '',
         templateColumns: [],
         templateColumnFilters: [],
-        templateColumnOperations: [],
+        templateColumnAggregationFunctions: [],
 
         templateTypesSelectData: [],
         reportingSystemsSelectData: [],
@@ -75,12 +80,14 @@ class TemplateEditForm extends PureComponent {
     handleSubmit = (values) => {
         // console.log(Object.assign({}, values, {
         //     templateColumns: this.props.templateColumnsSelectData.filter(column => values.templateColumns.indexOf(column.name) !== -1),
-        //     filters: values.templateColumnFilters.map(filter => ({...filter, column: this.props.templateColumnsSelectData.filter(column => column.name === filter.column)[0]}))
+        //     filters: values.templateColumnFilters.map(filter => ({...filter, column: this.props.templateColumnsSelectData.filter(column => column.name === filter.column)[0]})),
+        //     aggregationFunctions: values.templateColumnAggregationFunctions.map(aggfunc => ({...aggfunc, column: this.props.templateColumnsSelectData.filter(column => column.name === aggfunc.column)[0]})),
         // }))
 
         this.props.addNewTemplate(Object.assign({}, values, {
             templateColumns: this.props.templateColumnsSelectData.filter(column => values.templateColumns.indexOf(column.name) !== -1),
-            filters: values.templateColumnFilters.map(filter => ({...filter, column: this.props.templateColumnsSelectData.filter(column => column.name === filter.column)[0]}))
+            filters: values.templateColumnFilters.map(filter => ({...filter, column: this.props.templateColumnsSelectData.filter(column => column.name === filter.column)[0]})),
+            aggregationFunctions: values.templateColumnAggregationFunctions.map(aggfunc => ({...aggfunc, column: this.props.templateColumnsSelectData.filter(column => column.name === aggfunc.column)[0]}))
         }))
     }
 
@@ -94,7 +101,7 @@ class TemplateEditForm extends PureComponent {
                     reportingSystemId: this.props.reportingSystemId,
                     templateColumns: this.props.templateColumns,
                     templateColumnFilters: this.props.templateColumnFilters,
-                    templateColumnOperations: this.props.templateColumnOperations
+                    templateColumnAggregationFunctions: this.props.templateColumnAggregationFunctions
                 }}
 
                 validationSchema={addTemplateValidationSchema}
@@ -285,6 +292,144 @@ class TemplateEditForm extends PureComponent {
                                         onClick={() => arrayHelpers.push({ column: '', operation: '', boundValue: '' })}
                                     >
                                         Добавить фильтр
+                                    </Button>
+                                </div>
+                            )}
+                          />
+
+                        <FieldArray
+                            name="templateColumnAggregationFunctions"
+                            render={arrayHelpers => (
+                                <div style={{ border: '1px dashed #dcdcdc', padding: '10px', marginTop: '20px' }}>
+                                    <label> Показатели </label>
+                                    <table border="0" style={{ visibility: props.values.templateColumnAggregationFunctions.length ? 'visible' : 'hidden' }}>
+                                        <tbody>
+                                           <tr>
+                                                <th>Поле</th>
+                                                <th>Показатель</th>
+                                                <th>Название показателя</th>
+                                           </tr>
+
+                                        {props.values.templateColumnAggregationFunctions.map((filter, index) => (
+                                            <tr key={index}>
+
+                                                <td>
+                                                    <Field
+                                                        name={`templateColumnAggregationFunctions[${index}].column`}
+                                                        render={({ field }) => (
+                                                            <div style={{ display: 'inline-block', marginBottom: '10px' }}>
+                                                                 <div style={{ display: 'inline-block' }}>
+                                                                     <Select
+                                                                         {...field}
+                                                                         name={`templateColumnAggregationFunctions[${index}].column`}
+                                                                         value={props.values['templateColumnAggregationFunctions'][index]['column']}
+                                                                         onChange={(val) => props.setFieldValue(`templateColumnAggregationFunctions[${index}].column`, val)}
+                                                                         onBlur={() => props.setFieldTouched(`templateColumnAggregationFunctions[${index}].column`, true)}
+                                                                         style={{ width: 200 }}
+                                                                         className={
+                                                                             'wo-select' +
+                                                                             (props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['column']
+                                                                                && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['column'] ? ' error' : '')
+                                                                         }
+                                                                     >
+                                                                         {this.props.templateColumnsSelectData.filter(col => props.values.templateColumns.indexOf(col.name) !== -1).map(col =>
+                                                                             <Option key={col['name']} value={col['name']}>{col['humanReadableName']}</Option>
+                                                                         )}
+                                                                     </Select>
+                                                                 </div>
+                                                                 <div style={{ display: 'inline-block', width: 20 }} >
+                                                                     {props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['column']
+                                                                        && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['column'] && (
+                                                                         <ExclamationHelper type='error' title={props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index]['column']} />
+                                                                     )}
+                                                                 </div>
+                                                            </div>
+                                                        )}
+                                                    />
+                                                </td>
+
+                                                <td>
+                                                    <Field
+                                                        name={`templateColumnAggregationFunctions[${index}].operation`}
+                                                        render={({ field }) => (
+                                                            <div style={{ display: 'inline-block', marginBottom: '10px' }}>
+                                                                 <div style={{ display: 'inline-block' }}>
+                                                                     <Select
+                                                                         {...field}
+                                                                         name={`templateColumnAggregationFunctions[${index}].operation`}
+                                                                         value={props.values['templateColumnAggregationFunctions'][index]['operation']}
+                                                                         onChange={(val) => props.setFieldValue(`templateColumnAggregationFunctions[${index}].operation`, val)}
+                                                                         onBlur={() => props.setFieldTouched(`templateColumnAggregationFunctions[${index}].operation`, true)}
+                                                                         style={{ width: 200 }}
+                                                                         className={
+                                                                             'wo-select' +
+                                                                             (props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['operation']
+                                                                                && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['operation'] ? ' error' : '')
+                                                                         }
+                                                                     >
+                                                                         {
+                                                                              this.props.templateColumnsSelectData.filter(col => col.name === props.values['templateColumnAggregationFunctions'][index]['column'])[0]
+                                                                    && this.props.templateColumnsSelectData.filter(col => col.name === props.values['templateColumnAggregationFunctions'][index]['column'])[0].dataType &&
+                                                                             this.props.dataTypeDescriptions.filter(dataType => dataType.value === this.props.templateColumnsSelectData.filter(col => col.name === props.values['templateColumnAggregationFunctions'][index]['column'])[0].dataType)[0].aggregationFunctions.map(op =>
+                                                                             <Option key={op['value']} value={op['value']}>{op['name']}</Option>
+                                                                         )}
+                                                                     </Select>
+                                                                 </div>
+                                                                 <div style={{ display: 'inline-block', width: 20 }} >
+                                                                     {props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['operation']
+                                                                        && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['operation'] && (
+                                                                         <ExclamationHelper type='error' title={props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index]['operation']} />
+                                                                     )}
+                                                                 </div>
+                                                            </div>
+                                                        )}
+                                                    />
+                                                </td>
+
+                                                <td>
+                                                    <Field
+                                                        name={`templateColumnAggregationFunctions[${index}].boundValue`}
+                                                        render={({ field }) => (
+                                                            <div style={{ display: 'inline-block', marginBottom: '10px' }}>
+                                                                <div style={{ display: 'inline-block' }}>
+                                                                    <Input
+                                                                        {...field}
+                                                                        onChange={props.handleChange}
+                                                                        onBlur={props.handleBlur}
+                                                                        style={{ width: 200 }}
+                                                                        className={
+                                                                            'wo-input' +
+                                                                            (props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['boundValue']
+                                                                            && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['boundValue']? ' error' : '')}
+                                                                    />
+                                                                </div>
+                                                                <div style={{ display: 'inline-block', width: 20 }} >
+                                                                    {props.errors['templateColumnAggregationFunctions'] && props.errors['templateColumnAggregationFunctions'][index] && props.errors['templateColumnAggregationFunctions'][index]['boundValue']
+                                                                        && props.touched['templateColumnAggregationFunctions'] && props.touched['templateColumnAggregationFunctions'][index] && props.touched['templateColumnAggregationFunctions'][index]['boundValue'] && (
+                                                                        <ExclamationHelper type='error' title={props.errors['templateColumnAggregationFunctions'][index]['boundValue']} />
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    />
+                                                </td>
+
+                                                <td>
+                                                    <i
+                                                        style={{ cursor: 'pointer', fontSize: '20px', border: '1px solid #ccc', padding: '3px', borderRadius: '3px', marginBottom: '10px' }}
+                                                        className="fa fa-trash" onClick={() => arrayHelpers.remove(index)}>
+                                                    </i>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                        </tbody>
+                                    </table>
+
+                                    <Button
+                                        type="button"
+                                        onClick={() => arrayHelpers.push({ column: '', operation: '', boundValue: '' })}
+                                    >
+                                        Добавить показатель
                                     </Button>
                                 </div>
                             )}
