@@ -57,7 +57,7 @@ class AddReportModal extends Component {
 
                 onSubmit={this.handleSubmit}
             >
-                {props => console.log(props) || (
+                {props => (
                     <Modal
                         title="Генерация отчета по шаблону"
                         visible={this.props.visible}

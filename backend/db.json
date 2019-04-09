@@ -31,15 +31,15 @@
     "content": "string",
     "name": "Test Report 1",
     "templateColumns": [
-        {
-          "columnName": "DealSum",
-          "humanReadableName": "DealSum"
-        },
-        {
-          "columnName": "PointTransactionLimit",
-          "humanReadableName": "PointTransactionLimit"
-        }
-      ],
+      {
+        "columnName": "DealSum",
+        "humanReadableName": "DealSum"
+      },
+      {
+        "columnName": "PointTransactionLimit",
+        "humanReadableName": "PointTransactionLimit"
+      }
+    ],
     "table": [
       {
         "DealSum": 0.011,
@@ -360,6 +360,109 @@
       "user": null,
       "reportingSystemId": "48a96857-0c53-431e-886a-886b65b81e98",
       "userId": "bd504b3f-81fe-42ca-b966-675515b07af9"
+    },
+    {
+      "name": "test template 5",
+      "templateType": 0,
+      "templateColumns": [
+        {
+          "name": "ReceiverMiddleName",
+          "humanReadableName": "ReceiverMiddleName",
+          "dataType": {
+            "name": "Строка",
+            "value": "0"
+          }
+        },
+        {
+          "name": "ReceiverPassportCountry",
+          "humanReadableName": "ReceiverPassportCountry",
+          "dataType": {
+            "name": "Строка",
+            "value": "0"
+          }
+        },
+        {
+          "name": "LicenseeTransactionLimit",
+          "humanReadableName": "лимит по транзакциям лицензиата",
+          "dataType": {
+            "name": "Число",
+            "value": "1"
+          }
+        }
+      ],
+      "filters": [],
+      "aggregationFunctions": [],
+      "reportingSystem": null,
+      "user": null,
+      "reportingSystemId": "48a96857-0c53-431e-886a-886b65b81e98",
+      "userId": "bd504b3f-81fe-42ca-b966-675515b07af9",
+      "id": "QLGVOqx"
+    },
+    {
+      "name": "test template 8",
+      "templateType": 0,
+      "templateColumns": [
+        {
+          "name": "DealSum",
+          "humanReadableName": "DealSum",
+          "dataType": {
+            "name": "Число",
+            "value": "1"
+          }
+        },
+        {
+          "name": "PointId",
+          "humanReadableName": "PointId",
+          "dataType": {
+            "name": "Строка",
+            "value": "0"
+          }
+        },
+        {
+          "name": "DealState",
+          "humanReadableName": "DealState",
+          "dataType": {
+            "name": "Строка",
+            "value": "0"
+          }
+        },
+        {
+          "name": "LicenseId",
+          "humanReadableName": "LicenseId",
+          "dataType": {
+            "name": "Строка",
+            "value": "0"
+          }
+        }
+      ],
+      "filters": [
+        {
+          "column": {
+            "name": "DealSum",
+            "humanReadableName": "DealSum",
+            "dataType": {
+              "name": "Число",
+              "value": "1"
+            }
+          },
+          "operation": 1,
+          "boundValue": "322131"
+        }
+      ],
+      "aggregationFunctions": [],
+      "reportingSystem": null,
+      "user": null,
+      "reportingSystemId": "48a96857-0c53-431e-886a-886b65b81e98",
+      "userId": "bd504b3f-81fe-42ca-b966-675515b07af9",
+      "templateColumnFilters": [
+        {
+          "column": "DealSum",
+          "operation": 1,
+          "boundValue": "322131"
+        }
+      ],
+      "templateColumnOperations": [],
+      "id": "imHqh7m"
     }
   ],
   "newTemplateData": {
@@ -367,14 +470,6 @@
       {
         "value": 0,
         "name": "Таблица"
-      },
-      {
-        "value": 2,
-        "name": "Гистограмма"
-      },
-      {
-        "value": 1,
-        "name": "Круговая диаграмма"
       }
     ],
     "reportingSystems": [
@@ -382,287 +477,539 @@
         "id": "48a96857-0c53-431e-886a-886b65b81e98",
         "name": "ЦУЗ",
         "tableName": "tsuz_log",
-        "columnNameMapping": null,
-        "columnsDescription": null,
         "tableColumns": [
           {
             "name": "DealSum",
             "humanReadableName": "DealSum",
-            "dataType": 4
+            "dataType": {
+              "name": "Число",
+              "value": "1"
+            }
           },
           {
             "name": "PointId",
             "humanReadableName": "PointId",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "DealState",
             "humanReadableName": "DealState",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "LicenseId",
             "humanReadableName": "LicenseId",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "DealNumber",
             "humanReadableName": "DealNumber",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "LicenseeId",
             "humanReadableName": "LicenseeId",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "PointTitle",
             "humanReadableName": "PointTitle",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "ProviderId",
             "humanReadableName": "ProviderId",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "LCategoryId",
             "humanReadableName": "LCategoryId",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "LicenseType",
             "humanReadableName": "LicenseType",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "PointActive",
             "humanReadableName": "PointActive",
-            "dataType": 1
+            "dataType": {
+              "name": "Число",
+              "value": "1"
+            }
           },
           {
             "name": "EmployeeName",
             "humanReadableName": "EmployeeName",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "ProviderName",
             "humanReadableName": "ProviderName",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "ReceiverName",
             "humanReadableName": "ReceiverName",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "DealPaymentId",
             "humanReadableName": "DealPaymentId",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "EmployeeEmail",
             "humanReadableName": "EmployeeEmail",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "EmployeePhone",
             "humanReadableName": "EmployeePhone",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "LicenseNumber",
             "humanReadableName": "LicenseNumber",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "LicenseeEmail",
             "humanReadableName": "эл.почта лицензиата",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "LicenseePhone",
             "humanReadableName": "телефон лицензиата",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "PointTimeZone",
             "humanReadableName": "PointTimeZone",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "DealCreateDate",
             "humanReadableName": "DealCreateDate",
-            "dataType": 3
+            "dataType": {
+              "name": "Дата и Время",
+              "value": "3"
+            }
           },
           {
             "name": "EmployeeActive",
             "humanReadableName": "EmployeeActive",
-            "dataType": 1
+            "dataType": {
+              "name": "Число",
+              "value": "1"
+            }
           },
           {
             "name": "LicenseEndDate",
             "humanReadableName": "LicenseEndDate",
-            "dataType": 2
+            "dataType": {
+              "name": "Дата",
+              "value": "2"
+            }
           },
           {
             "name": "PointOverdraft",
             "humanReadableName": "PointOverdraft",
-            "dataType": 1
+            "dataType": {
+              "name": "Число",
+              "value": "1"
+            }
           },
           {
             "name": "EmployeeSurname",
             "humanReadableName": "EmployeeSurname",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "OrganizationInn",
             "humanReadableName": "OrganizationInn",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "ReceiverAddress",
             "humanReadableName": "ReceiverAddress",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "ReceiverSurname",
             "humanReadableName": "ReceiverSurname",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "LicenseStartDate",
             "humanReadableName": "LicenseStartDate",
-            "dataType": 2
+            "dataType": {
+              "name": "Дата",
+              "value": "2"
+            }
           },
           {
             "name": "LicenseeCategory",
             "humanReadableName": "категория лицензиата",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "LicensePointCount",
             "humanReadableName": "LicensePointCount",
-            "dataType": 1
+            "dataType": {
+              "name": "Число",
+              "value": "1"
+            }
           },
           {
             "name": "LicenseeComission",
             "humanReadableName": "комиссия лицензиата",
-            "dataType": 1
+            "dataType": {
+              "name": "Число",
+              "value": "1"
+            }
           },
           {
             "name": "OrganizationTitle",
             "humanReadableName": "OrganizationTitle",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "ReceiverBirthDate",
             "humanReadableName": "ReceiverBirthDate",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "EmployeeMiddleName",
             "humanReadableName": "EmployeeMiddleName",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "ReceiverBirthPlace",
             "humanReadableName": "ReceiverBirthPlace",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "ReceiverCardHolder",
             "humanReadableName": "ReceiverCardHolder",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "ReceiverCardNumber",
             "humanReadableName": "ReceiverCardNumber",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "ReceiverMiddleName",
             "humanReadableName": "ReceiverMiddleName",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "ReceiverPassportFrom",
             "humanReadableName": "ReceiverPassportFrom",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "PointTransactionLimit",
             "humanReadableName": "PointTransactionLimit",
-            "dataType": 4
+            "dataType": {
+              "name": "Число",
+              "value": "1"
+            }
           },
           {
             "name": "ReceiverPassportSeries",
             "humanReadableName": "ReceiverPassportSeries",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "ReceiverPassportCountry",
             "humanReadableName": "ReceiverPassportCountry",
-            "dataType": 0
+            "dataType": {
+              "name": "Строка",
+              "value": "0"
+            }
           },
           {
             "name": "LicenseeTransactionLimit",
             "humanReadableName": "лимит по транзакциям лицензиата",
-            "dataType": 1
+            "dataType": {
+              "name": "Число",
+              "value": "1"
+            }
           }
         ]
       }
     ],
-    "operationTypesForDataTypes": {
-      "String": {
-        "0": "Equal",
-        "5": "Contains",
-        "6": "NotEqual"
+    "dataTypeDescriptions": [
+      {
+        "name": "Строка",
+        "value": "0",
+        "operations": [
+          {
+            "name": "Содержит",
+            "value": 5
+          },
+          {
+            "name": "=",
+            "value": 0
+          },
+          {
+            "name": "!=",
+            "value": 6
+          }
+        ],
+        "aggregationFunctions": [
+          {
+            "name": "Максимум",
+            "value": 1
+          },
+          {
+            "name": "Минимум",
+            "value": 0
+          }
+        ]
       },
-      "Number": {
-        "0": "Equal",
-        "1": "GreaterOrEqual",
-        "2": "Greater",
-        "3": "Less",
-        "6": "NotEqual"
+      {
+        "name": "Число",
+        "value": "1",
+        "operations": [
+          {
+            "name": "=",
+            "value": 0
+          },
+          {
+            "name": ">=",
+            "value": 1
+          },
+          {
+            "name": ">",
+            "value": 2
+          },
+          {
+            "name": "<",
+            "value": 3
+          },
+          {
+            "name": "<=",
+            "value": 4
+          },
+          {
+            "name": "!=",
+            "value": 6
+          }
+        ],
+        "aggregationFunctions": [
+          {
+            "name": "Максимум",
+            "value": 1
+          },
+          {
+            "name": "Минимум",
+            "value": 0
+          },
+          {
+            "name": "Медиана",
+            "value": 4
+          },
+          {
+            "name": "Среднее",
+            "value": 3
+          },
+          {
+            "name": "Сумма",
+            "value": 2
+          }
+        ]
       },
-      "Date": {
-        "0": "Equal",
-        "1": "GreaterOrEqual",
-        "2": "Greater",
-        "3": "Less",
-        "6": "NotEqual"
+      {
+        "name": "Дата",
+        "value": "2",
+        "operations": [
+          {
+            "name": "=",
+            "value": 0
+          },
+          {
+            "name": ">=",
+            "value": 1
+          },
+          {
+            "name": ">",
+            "value": 2
+          },
+          {
+            "name": "<",
+            "value": 3
+          },
+          {
+            "name": "<=",
+            "value": 4
+          },
+          {
+            "name": "!=",
+            "value": 6
+          }
+        ],
+        "aggregationFunctions": [
+          {
+            "name": "Максимум",
+            "value": 1
+          },
+          {
+            "name": "Минимум",
+            "value": 0
+          },
+          {
+            "name": "Медиана",
+            "value": 4
+          }
+        ]
       },
-      "DateTime": {
-        "0": "Equal",
-        "1": "GreaterOrEqual",
-        "2": "Greater",
-        "3": "Less",
-        "6": "NotEqual"
+      {
+        "name": "Дата и Время",
+        "value": "3",
+        "operations": [
+          {
+            "name": "=",
+            "value": 0
+          },
+          {
+            "name": ">=",
+            "value": 1
+          },
+          {
+            "name": ">",
+            "value": 2
+          },
+          {
+            "name": "<",
+            "value": 3
+          },
+          {
+            "name": "<=",
+            "value": 4
+          },
+          {
+            "name": "!=",
+            "value": 6
+          }
+        ],
+        "aggregationFunctions": [
+          {
+            "name": "Максимум",
+            "value": 1
+          },
+          {
+            "name": "Минимум",
+            "value": 0
+          },
+          {
+            "name": "Медиана",
+            "value": 4
+          }
+        ]
       }
-    },
-    "aggregationFunctions": {
-      "String": {
-        "0": "Min",
-        "1": "Max"
-      },
-      "Number": {
-        "0": "Min",
-        "1": "Max",
-        "2": "Sum",
-        "3": "Avg",
-        "4": "Med"
-      },
-      "Date": {
-        "0": "Min",
-        "1": "Max",
-        "4": "Med"
-      },
-      "DateTime": {
-        "0": "Min",
-        "1": "Max",
-        "4": "Med"
-      }
-    }
+    ]
   }
 }

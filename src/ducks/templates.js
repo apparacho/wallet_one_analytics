@@ -29,6 +29,14 @@ const initState = {
                 name: '',
                 tableColumns: []
             }
+        ],
+        dataTypeDescriptions: [
+            {
+              name: "Строка",
+              value: "0",
+              operations: [],
+              aggregationFunctions: []
+            }
         ]
     },
     loading: false,
@@ -87,6 +95,10 @@ export const reportingSystemsDataSelector = (state) => ([{
         name:  newTemplateCreationDataSelector(state)['reportingSystems'][0].name,
 }])
 export const templateColumnsDataSelector = (state) => newTemplateCreationDataSelector(state)['reportingSystems'][0].tableColumns
+
+export const dataTypeDescriptionsSelector = (state) => newTemplateCreationDataSelector(state)['dataTypeDescriptions']
+                                             // newTemplateCreationDataSelector(state)['dataTypeDescriptions'][0].operations
+                                             // newTemplateCreationDataSelector(state)['dataTypeDescriptions'][0].aggregationFunctions
 
 
 /**

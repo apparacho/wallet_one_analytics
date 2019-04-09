@@ -1,9 +1,13 @@
 const jsonServer = require('json-server')
 const server = jsonServer.create()
 const path = require('path')
+const fs = require('fs')
 const router = jsonServer.router(path.join(__dirname, 'db.json'))
 const middlewares = jsonServer.defaults()
 const bodyParser = require("body-parser");
+
+const routes = path.resolve(path.join(__dirname, '', 'routes.json'));
+const routesJson = fs.readFileSync(routes, 'utf8');
 
 const port = 8080
 
@@ -13,11 +17,12 @@ server.get('/echo', (req, res) => {
     res.jsonp(req.query)
 })
 
-server.use(jsonServer.rewriter({
-    '/api/*': '/$1',
-    '/Templates/new_template_data': '/newTemplateData',
-    '/Reports/*': '/getReportData'
-}))
+server.use(jsonServer.rewriter(JSON.parse(routesJson)))
+// server.use(jsonServer.rewriter({
+//     '/api/*': '/$1',
+//     '/Templates/new_template_data': '/newTemplateData',
+//     '/Reports/*': '/getReportData'
+// }))
 
 // server.use(bodyParser.json());
 // server.post('/Templates', (req, res) => {
