@@ -84,6 +84,5 @@ approve in dev:
     IAC_URL: https://gitlab.w1.money/DevOps/Tools/devops-iac/pipelines
     IAC_TOKEN: $DEVOPS_IAC_TOKEN
     MATTERMOST_HOOK: 7n6sz8q6rbbhirhyf16j6i7k3y
-    REF_NAME: swarm
   only:
     - develop
