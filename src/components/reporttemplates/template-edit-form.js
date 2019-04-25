@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react'
+import React, { Component, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Formik, Form, Field, FieldArray } from 'formik'
 import ExclamationHelper from '../common/datadisplay/exclamationhelper/exclamation-helper'
 import { Button, Select, Input } from 'antd'
+import moment from 'moment'
 import FormikAntdSelect from '../common/form/formik/antd/select/formik-antd-select'
 import FormikAntdInput from '../common/form/formik/antd/input/formik-antd-input'
 import * as Yup from 'yup'
@@ -12,6 +13,13 @@ import {
     templateColumnsDataSelector, templateTypesDataSelector, dataTypeDescriptionsSelector
 } from "../../ducks/templates";
 import {connect} from "react-redux";
+
+import FormField from '../common/form/formik/form-field'
+import FormArrayField from '../common/form/formik/form-array-field'
+import FormikAntdDatepicker from '../common/form/formik/antd/datepicker/formik-antd-datepicker'
+import { momentDateTimeFormat, momentDateFormat } from '../common/form/formik/antd/datepicker/date-tiem-formats'
+import FormikAntdTextInput from '../common/form/formik/antd/input/formik-antd-text-input'
+import FormikAntdNumberInput from '../common/form/formik/antd/input/formik-antd-number-input'
 
 const Option = Select.Option
 
@@ -40,6 +48,25 @@ const FormFieldWithLabel = ({label, children}) => (
         {children}
     </div>
 )
+
+const MultiTypeValueInput = (props) => {
+    // 0 - String
+    // 1 - Number
+    // 2 - Date
+    // 3 - DateTime
+    const { dataType } = props
+    let component = <FormikAntdTextInput />
+
+    if (dataType === '1') {
+        component = <FormikAntdNumberInput allowClear={false} />
+    }
+    else if (dataType === '2' || dataType === '3' ) {
+        component = <FormikAntdDatepicker allowClear={false} showTime={dataType === '3'} />
+    }
+
+    return <FormArrayField {...props}>{component}</FormArrayField>
+}
+
 
 class TemplateEditForm extends PureComponent {
 
@@ -78,11 +105,11 @@ class TemplateEditForm extends PureComponent {
     }
 
     handleSubmit = (values) => {
-        // console.log(Object.assign({}, values, {
-        //     templateColumns: this.props.templateColumnsSelectData.filter(column => values.templateColumns.indexOf(column.name) !== -1),
-        //     filters: values.templateColumnFilters.map(filter => ({...filter, column: this.props.templateColumnsSelectData.filter(column => column.name === filter.column)[0]})),
-        //     aggregationFunctions: values.templateColumnAggregationFunctions.map(aggfunc => ({...aggfunc, column: this.props.templateColumnsSelectData.filter(column => column.name === aggfunc.column)[0]})),
-        // }))
+        console.log(Object.assign({}, values, {
+            templateColumns: this.props.templateColumnsSelectData.filter(column => values.templateColumns.indexOf(column.name) !== -1),
+            filters: values.templateColumnFilters.map(filter => ({...filter, column: this.props.templateColumnsSelectData.filter(column => column.name === filter.column)[0]})),
+            aggregationFunctions: values.templateColumnAggregationFunctions.map(aggfunc => ({...aggfunc, column: this.props.templateColumnsSelectData.filter(column => column.name === aggfunc.column)[0]})),
+        }))
 
         this.props.addNewTemplate(Object.assign({}, values, {
             templateColumns: this.props.templateColumnsSelectData.filter(column => values.templateColumns.indexOf(column.name) !== -1),
@@ -92,6 +119,22 @@ class TemplateEditForm extends PureComponent {
     }
 
     render() {
+
+        const onFilterColumnChange = (formikProps, index, dataSourceName, modelFieldName) => val => {
+            const columnsData = this.props.templateColumnsSelectData,
+                oldVal = formikProps.values[dataSourceName][index][modelFieldName],
+                getColumnDateTypeByValue = (val) => console.log(columnsData.filter(col => col.name === val)[0].dataType) || columnsData.filter(col => col.name === val)[0].dataType,
+                newValDataType = getColumnDateTypeByValue(val)
+            // if (val && oldVal && oldVal !== val && getColumnDateTypeByValue(oldVal) !== newValDataType) {
+            if (val && oldVal !== val) {
+                    console.log(newValDataType, typeof newValDataType)
+                formikProps.setFieldValue(`${dataSourceName}[${index}].boundValue`,
+                    newValDataType >= 2 ? moment(new Date(), (newValDataType === 3 ? momentDateTimeFormat : momentDateFormat)) : '' )
+            }
+            formikProps.setFieldValue(`${dataSourceName}[${index}].${modelFieldName}`, val)
+        }
+
+        // onChange={(val) => props.setFieldValue(`templateColumnFilters[${index}].column`, val)}
 
         return (
             <Formik key={Date.now()}
@@ -185,7 +228,7 @@ class TemplateEditForm extends PureComponent {
                                                                          {...field}
                                                                          name={`templateColumnFilters[${index}].column`}
                                                                          value={props.values['templateColumnFilters'][index]['column']}
-                                                                         onChange={(val) => props.setFieldValue(`templateColumnFilters[${index}].column`, val)}
+                                                                         onChange={onFilterColumnChange(props, index, 'templateColumnFilters', 'column')}
                                                                          onBlur={() => props.setFieldTouched(`templateColumnFilters[${index}].column`, true)}
                                                                          style={{ width: 200 }}
                                                                          className={
@@ -249,30 +292,12 @@ class TemplateEditForm extends PureComponent {
                                                 </td>
 
                                                 <td>
-                                                    <Field
-                                                        name={`templateColumnFilters[${index}].boundValue`}
-                                                        render={({ field }) => (
-                                                            <div style={{ display: 'inline-block', marginBottom: '10px' }}>
-                                                                <div style={{ display: 'inline-block' }}>
-                                                                    <Input
-                                                                        {...field}
-                                                                        onChange={props.handleChange}
-                                                                        onBlur={props.handleBlur}
-                                                                        style={{ width: 200 }}
-                                                                        className={
-                                                                            'wo-input' +
-                                                                            (props.errors['templateColumnFilters'] && props.errors['templateColumnFilters'][index] && props.errors['templateColumnFilters'][index]['boundValue']
-                                                                            && props.touched['templateColumnFilters'] && props.touched['templateColumnFilters'][index] && props.touched['templateColumnFilters'][index]['boundValue']? ' error' : '')}
-                                                                    />
-                                                                </div>
-                                                                <div style={{ display: 'inline-block', width: 20 }} >
-                                                                    {props.errors['templateColumnFilters'] && props.errors['templateColumnFilters'][index] && props.errors['templateColumnFilters'][index]['boundValue']
-                                                                        && props.touched['templateColumnFilters'] && props.touched['templateColumnFilters'][index] && props.touched['templateColumnFilters'][index]['boundValue'] && (
-                                                                        <ExclamationHelper type='error' title={props.errors['templateColumnFilters'][index]['boundValue']} />
-                                                                    )}
-                                                                </div>
-                                                            </div>
-                                                        )}
+                                                    <MultiTypeValueInput
+                                                        dataType={props.values['templateColumnFilters'][index]['column'] && this.props.templateColumnsSelectData.filter(col => col.name === props.values['templateColumnFilters'][index]['column'])[0].dataType}
+                                                        dataSourceName="templateColumnFilters"
+                                                        modelFieldName="boundValue"
+                                                        index={index}
+                                                        formikProps={props}
                                                     />
                                                 </td>
 

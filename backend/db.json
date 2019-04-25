@@ -912,5 +912,48 @@
         ]
       }
     ]
+  },
+  "getTemplateData": {
+    "id": "d82e1604-fccf-4540-8f61-d688960090d6",
+    "name": "test1",
+    "templateType": 0,
+    "templateColumns": [
+      {
+        "name": "DealSum",
+        "humanReadableName": "сумма сделки",
+        "dataType": 1
+      },
+      {
+        "name": "PointId",
+        "humanReadableName": "идентификатор точки",
+        "dataType": 0
+      },
+      {
+        "name": "DealState",
+        "humanReadableName": "статус сделки",
+        "dataType": 0
+      },
+      {
+        "name": "DealCreateDate",
+        "humanReadableName": "дата создания сделки",
+        "dataType": 3
+      }
+    ],
+    "filters": [
+      {
+        "operation": 4,
+        "column": {
+          "name": "DealCreateDate",
+          "humanReadableName": "дата создания сделки",
+          "dataType": 3
+        },
+        "boundValue": "04.12.2018 23:59:00"
+      }
+    ],
+    "aggregationFunctions": [],
+    "reportingSystem": null,
+    "user": null,
+    "reportingSystemId": "48a96857-0c53-431e-886a-886b65b81e98",
+    "userId": "bd504b3f-81fe-42ca-b966-675515b07af9"
   }
 }
