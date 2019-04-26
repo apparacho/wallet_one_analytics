@@ -75,6 +75,7 @@ build dev:
     - docker push $CI_REGISTRY_IMAGE:$ENV_VERSION
   only:
     - develop
+    - AN-52
 
 approve in dev:
   <<: *approve
@@ -86,3 +87,4 @@ approve in dev:
     MATTERMOST_HOOK: 7n6sz8q6rbbhirhyf16j6i7k3y
   only:
     - develop
+    - AN-52
