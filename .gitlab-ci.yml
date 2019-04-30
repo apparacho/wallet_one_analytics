@@ -6,10 +6,6 @@ variables:
   IAC_ID: TODO
   IAC_URL: TODO
   REF_NAME: master
-  substr: '$${CI_PROJECT_NAMESPACE%-*}'
-
-  # tmp=${a#*_}   # remove prefix ending in "_"
-  # b=${tmp%_*}   # remove suffix starting with "_"
 
 
 stages:
@@ -29,8 +25,8 @@ stages:
   fi
 
 .project_naming: &project_naming |
-  echo "$CI_PROJECT_NAMESPACE --- $CI_PROJECT_NAME -- $substr"
-  # export PROJECT_STACK=`echo "$CI_PROJECT_NAMESPACE" | tr '[:upper:]' '[:lower:]' `
+  export PROJECT_STACK=`echo "$CI_PROJECT_NAMESPACE" | tr '-' '_' `
+  echo "$PROJECT_STACK"
   # export PROJECT_NAME=`echo "$CI_PROJECT_NAME" | tr '[:upper:]' '[:lower:]' `
   # export ANSIBLE_VARS=${PROJECT_STACK}_${PROJECT_NAME}_version
 
