@@ -43,6 +43,7 @@ stages:
   services:
     - docker:1.12.1-dind
   before_script:
+    - env
     - "docker login -u $CI_REGISTRY_USER -p $CI_BUILD_TOKEN $CI_REGISTRY"
     - *docker_tag
     - *project_naming
@@ -69,20 +70,20 @@ stages:
 # Jobs
 build dev:
   <<: *build
-  script:
-    - docker build -t ${PROJECT_STACK}_${PROJECT_NAME} -f Dockerfile --build-arg REACT_APP_BASE_URL=http://172.17.14.98:2001/api .
-    - docker tag ${PROJECT_STACK}_${PROJECT_NAME} $CI_REGISTRY_IMAGE:$ENV_VERSION
-    - docker push $CI_REGISTRY_IMAGE:$ENV_VERSION
+  # script:
+  #   - docker build -t ${PROJECT_STACK}_${PROJECT_NAME} -f Dockerfile --build-arg REACT_APP_BASE_URL=http://172.17.14.98:2001/api .
+  #   - docker tag ${PROJECT_STACK}_${PROJECT_NAME} $CI_REGISTRY_IMAGE:$ENV_VERSION
+  #   - docker push $CI_REGISTRY_IMAGE:$ENV_VERSION
   only:
     - develop
 
-approve in dev:
-  <<: *approve
-  variables:
-    DEPLOY_ENV: dev
-    IAC_ID: 479
-    IAC_URL: https://gitlab.w1.money/DevOps/Tools/devops-iac/pipelines
-    IAC_TOKEN: $DEVOPS_IAC_TOKEN
-    MATTERMOST_HOOK: 7n6sz8q6rbbhirhyf16j6i7k3y
-  only:
-    - develop
+# approve in dev:
+#   <<: *approve
+#   variables:
+#     DEPLOY_ENV: dev
+#     IAC_ID: 479
+#     IAC_URL: https://gitlab.w1.money/DevOps/Tools/devops-iac/pipelines
+#     IAC_TOKEN: $DEVOPS_IAC_TOKEN
+#     MATTERMOST_HOOK: 7n6sz8q6rbbhirhyf16j6i7k3y
+#   only:
+#     - develop
