@@ -28,7 +28,7 @@ stages:
   export PROJECT_STACK=`echo "$CI_PROJECT_NAMESPACE" | tr '-' '_' `
   # export PROJECT_NAME=`echo "$CI_PROJECT_NAME" | tr '[:upper:]' '[:lower:]' `
   export ANSIBLE_VARS=${PROJECT_STACK}_${CI_PROJECT_NAME}_version
-  echo "$ANSIBLE_VARS"
+  echo ${ANSIBLE_VARS}
 
 .approve_curl: &approve_curl |
   export CONTENT=$(curl -X POST --form token=$IAC_TOKEN --form variables[DEPLOY_AUTHOR]=$GITLAB_USER_LOGIN --form variables[DEPLOY_PROJECT_STACK]=$PROJECT_STACK --form variables[DEPLOY_PROJECT_STAND]=$DEPLOY_ENV --form ref=$REF_NAME --form variables[DEPLOY_PROJECT_NAME]=$PROJECT_NAME --form variables[DEPLOY_PROJECT_VARS]=$ANSIBLE_VARS --form variables[DEPLOY_PROJECT_VERSION]=$ENV_VERSION ${IAC_API_URL})
