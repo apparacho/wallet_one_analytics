@@ -72,13 +72,12 @@ stages:
 # Jobs
 build dev:
   <<: *build
+  variables:
+    TAG: ${CI_REGISTRY}/${PROJECT_STACK}/${CI_PROJECT_NAME}
   script:
     - docker build -t ${PROJECT_STACK}_${CI_PROJECT_NAME} -f Dockerfile --build-arg REACT_APP_BASE_URL=http://172.17.14.98:2001/api .
-    - docker tag ${PROJECT_STACK}_${CI_PROJECT_NAME} $CI_REGISTRY_IMAGE:$ENV_VERSION
-    - echo "docker tag ${PROJECT_STACK}_${CI_PROJECT_NAME} $CI_REGISTRY_IMAGE:$ENV_VERSION"
-    - echo "docker tag ${PROJECT_STACK}_${CI_PROJECT_NAME} ${CI_REGISTRY}/${PROJECT_STACK}/${CI_PROJECT_NAME}:${ENV_VERSION}"
-
-    - docker push $CI_REGISTRY_IMAGE:$ENV_VERSION
+    - docker tag ${PROJECT_STACK}_${CI_PROJECT_NAME} ${TAG}:${ENV_VERSION}
+    - docker push ${TAG}
   only:
     - develop
 
