@@ -24,6 +24,7 @@ stages:
   fi
 
 .project_naming: &project_naming |
+  echo "$CI_PROJECT_NAMESPACE --- $CI_PROJECT_NAME"
   export PROJECT_STACK=`echo "$CI_PROJECT_NAMESPACE" | tr '[:upper:]' '[:lower:]' `
   export PROJECT_NAME=`echo "$CI_PROJECT_NAME" | tr '[:upper:]' '[:lower:]' `
   export ANSIBLE_VARS=${PROJECT_STACK}_${PROJECT_NAME}_version
