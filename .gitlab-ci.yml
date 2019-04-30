@@ -31,9 +31,9 @@ stages:
   echo ${ANSIBLE_VARS}
 
 .approve_curl: &approve_curl |
-  export CONTENT=$(curl -X POST --form token=$IAC_TOKEN --form variables[DEPLOY_AUTHOR]=$GITLAB_USER_LOGIN --form variables[DEPLOY_PROJECT_STACK]=$PROJECT_STACK --form variables[DEPLOY_PROJECT_STAND]=$DEPLOY_ENV --form ref=$REF_NAME --form variables[DEPLOY_PROJECT_NAME]=$PROJECT_NAME --form variables[DEPLOY_PROJECT_VARS]=$ANSIBLE_VARS --form variables[DEPLOY_PROJECT_VERSION]=$ENV_VERSION ${IAC_API_URL})
+  export CONTENT=$(curl -X POST --form token=$IAC_TOKEN --form variables[DEPLOY_AUTHOR]=$GITLAB_USER_LOGIN --form variables[DEPLOY_PROJECT_STACK]=$PROJECT_STACK --form variables[DEPLOY_PROJECT_STAND]=$DEPLOY_ENV --form ref=$REF_NAME --form variables[DEPLOY_PROJECT_NAME]=$CI_PROJECT_NAME --form variables[DEPLOY_PROJECT_VARS]=$ANSIBLE_VARS --form variables[DEPLOY_PROJECT_VERSION]=$ENV_VERSION ${IAC_API_URL})
   export PIPELINE_ID=$( echo ${CONTENT} | jq ".id" )
-  export TEXT="Создана задача на деплой стека $PROJECT_STACK для проекта $PROJECT_NAME версии $ENV_VERSION на стенд $DEPLOY_ENV - $IAC_URL/$PIPELINE_ID"
+  export TEXT="Создана задача на деплой стека $PROJECT_STACK для проекта $CI_PROJECT_NAME версии $ENV_VERSION на стенд $DEPLOY_ENV - $IAC_URL/$PIPELINE_ID"
   export JSON="{\"channel\": \"operation\",  \"username\":\"$GITLAB_USER_LOGIN\", \"text\": \"$TEXT\"}"
 #  curl -s -d "payload=${JSON}" ${MATTERMOST_URL}/${MATTERMOST_HOOK}
 
@@ -72,10 +72,10 @@ stages:
 # Jobs
 build dev:
   <<: *build
-  # script:
-  #   - docker build -t ${PROJECT_STACK}_${PROJECT_NAME} -f Dockerfile --build-arg REACT_APP_BASE_URL=http://172.17.14.98:2001/api .
-  #   - docker tag ${PROJECT_STACK}_${PROJECT_NAME} $CI_REGISTRY_IMAGE:$ENV_VERSION
-  #   - docker push $CI_REGISTRY_IMAGE:$ENV_VERSION
+  script:
+    - docker build -t ${PROJECT_STACK}_${CI_PROJECT_NAME} -f Dockerfile --build-arg REACT_APP_BASE_URL=http://172.17.14.98:2001/api .
+    - docker tag ${PROJECT_STACK}_${CI_PROJECT_NAME} $CI_REGISTRY_IMAGE:$ENV_VERSION
+    - docker push $CI_REGISTRY_IMAGE:$ENV_VERSION
   only:
     - develop
 
