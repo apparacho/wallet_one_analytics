@@ -28,7 +28,7 @@ stages:
   export PROJECT_STACK=`echo "$CI_PROJECT_NAMESPACE" | tr '-' '_' `
   # export PROJECT_NAME=`echo "$CI_PROJECT_NAME" | tr '[:upper:]' '[:lower:]' `
   export ANSIBLE_VARS=${PROJECT_STACK}_${CI_PROJECT_NAME}_version
-  echo ${PROJECT_STACK}
+  # echo ${PROJECT_STACK}
 
 .approve_curl: &approve_curl |
   export CONTENT=$(curl -X POST --form token=$IAC_TOKEN --form variables[DEPLOY_AUTHOR]=$GITLAB_USER_LOGIN --form variables[DEPLOY_PROJECT_STACK]=$PROJECT_STACK --form variables[DEPLOY_PROJECT_STAND]=$DEPLOY_ENV --form ref=$REF_NAME --form variables[DEPLOY_PROJECT_NAME]=$CI_PROJECT_NAME --form variables[DEPLOY_PROJECT_VARS]=$ANSIBLE_VARS --form variables[DEPLOY_PROJECT_VERSION]=$ENV_VERSION ${IAC_API_URL})
@@ -45,7 +45,6 @@ stages:
   services:
     - docker:1.12.1-dind
   before_script:
-    - env
     - "docker login -u $CI_REGISTRY_USER -p $CI_BUILD_TOKEN $CI_REGISTRY"
     - *docker_tag
     - *project_naming
@@ -75,6 +74,7 @@ build dev:
   script:
     - docker build -t ${PROJECT_STACK}_${CI_PROJECT_NAME} -f Dockerfile --build-arg REACT_APP_BASE_URL=http://172.17.14.98:2001/api .
     - docker tag ${PROJECT_STACK}_${CI_PROJECT_NAME} ${CI_REGISTRY}/${PROJECT_STACK}/${CI_PROJECT_NAME}:${ENV_VERSION}
+    - echo "docker push ${CI_REGISTRY}/${PROJECT_STACK}/${CI_PROJECT_NAME}:${ENV_VERSION}"
     - docker push ${CI_REGISTRY}/${PROJECT_STACK}/${CI_PROJECT_NAME}:${ENV_VERSION}
   only:
     - develop
