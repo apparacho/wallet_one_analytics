@@ -85,7 +85,7 @@ approve in dev:
     DEPLOY_ENV: dev
     IAC_ID: 537
     IAC_URL: https://gitlab.w1.money/DevOps/cluster/fornax/pipelines
-    IAC_TOKEN: $fornax_iac_token
+    IAC_TOKEN: $FORNAX_IAC_TOKEN
     MATTERMOST_HOOK: 7n6sz8q6rbbhirhyf16j6i7k3y
   only:
     - develop
