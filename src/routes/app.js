@@ -22,7 +22,7 @@ class AppRoute extends Component {
         return (
             <Fragment>
                 <PageHeader />
-                <LeftNavPanel />
+                <LeftNavPanel {...this.props} />
                 <div className="content-wrapper">
                     <section className="content container-fluid">
                         <Switch>
