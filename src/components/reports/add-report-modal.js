@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Radio, Button } from 'antd'
 import {connect} from "react-redux"
 import { fetchTemplatesList, templateListSelector } from "../../ducks/templates"
-import { addNewReport, generatingNewReportSelector } from "../../ducks/reports"
+import { addNewReport, isGeneratingNewReportSelector } from "../../ducks/reports"
 import { Formik, Form } from 'formik'
 import FormikAntdInput from '../common/form/formik/antd/input/formik-antd-input'
 import * as Yup from 'yup'
@@ -61,7 +61,7 @@ class AddReportModal extends Component {
                     <Modal
                         title="Генерация отчета по шаблону"
                         visible={this.props.visible}
-                        confirmLoading={this.props.generatingNewReport}
+                        confirmLoading={this.props.isGeneratingNewReport}
                         onCancel={this.handleCancel}
                         footer={[]}
                     >
@@ -97,7 +97,7 @@ class AddReportModal extends Component {
                                 <Button
                                     key="cancel"
                                     onClick={this.handleCancel}
-                                    disabled={this.props.generatingNewReport}
+                                    disabled={this.props.isGeneratingNewReport}
                                     style={{ margin: '0 20px 0 0' }}
                                 >
                                     Отмена
@@ -106,7 +106,7 @@ class AddReportModal extends Component {
                                     key="submit"
                                     htmlType="submit"
                                     type="primary"
-                                    loading={this.props.generatingNewReport}
+                                    loading={this.props.isGeneratingNewReport}
                                     disabled={props.isSubmitting || !props.isValid || !props.dirty}
                                 >
                                     Сгенерировать
@@ -114,8 +114,7 @@ class AddReportModal extends Component {
                             </div>
                         </Form>
                     </Modal>
-                    )
-                }
+                )}
             </Formik>
         )
     }
@@ -124,7 +123,7 @@ class AddReportModal extends Component {
 export default connect(
     (state) => ({
         templateList: templateListSelector(state),
-        generatingNewReport: generatingNewReportSelector(state)
+        isGeneratingNewReport: isGeneratingNewReportSelector(state)
     }),
     { fetchTemplatesList, addNewReport }
 )(AddReportModal)

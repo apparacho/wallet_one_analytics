@@ -17,6 +17,10 @@ export const FETCH_REPORT_SUCCESS = `${prefix}/FETCH_REPORT_SUCCESS`
 export const ADD_NEW_REPORT_START = `${prefix}/ADD_NEW_REPORT_START`
 export const ADD_NEW_REPORT_SUCCESS = `${prefix}/ADD_NEW_REPORT_SUCCESS`
 
+export const DELETE_REPORT_START = `${prefix}/DELETE_REPORT_START`
+export const DELETE_REPORT_SUCCESS = `${prefix}/DELETE_REPORT_SUCCESS`
+export const DELETE_REPORT_FAILURE = `${prefix}/DELETE_REPORT_FAILURE`
+
 /**
  * Reducer
  * */
@@ -34,7 +38,12 @@ const initState = {
         indicators: []
     },
     loading: false,
-    generatingNewReport: false
+    generatingNewReport: false,
+    currentOperation: {
+        type: '',   // generatingNewReport / deletingReport
+        status: '', // start / success / error,
+        error: null
+    }
 }
 
 export default function reducer(state = initState, action) {
@@ -49,9 +58,31 @@ export default function reducer(state = initState, action) {
       case FETCH_REPORT_SUCCESS:
           return {...state, report: payload, loading: false}
       case ADD_NEW_REPORT_START:
-          return {...state, generatingNewReport: true}
+          return {...state, currentOperation: {
+              type: 'generatingNewReport',
+              status: 'start'
+          }}
       case ADD_NEW_REPORT_SUCCESS:
-          return {...state, generatingNewReport: false}
+          return {...state, currentOperation: {
+              type: 'generatingNewReport',
+              status: 'success'
+          }}
+      case DELETE_REPORT_START:
+          return {...state, currentOperation: {
+              type: 'deletingReport',
+              status: 'start'
+          }}
+      case DELETE_REPORT_SUCCESS:
+          return {...state, currentOperation: {
+              type: 'deletingReport',
+              status: 'success'
+          }}
+      case DELETE_REPORT_FAILURE:
+          return {...state, currentOperation: {
+              type: 'deletingReport',
+              status: 'error',
+              error: payload
+          }}
       default:
           return state
   }
@@ -64,7 +95,12 @@ export default function reducer(state = initState, action) {
 export const stateSelector = (state) => state[moduleName]
 export const reportListSelector = (state) => stateSelector(state)['reportList']
 export const reportSelector = (state) => stateSelector(state)['report']
-export const generatingNewReportSelector = (state) => stateSelector(state)['generatingNewReport']
+export const isGeneratingNewReportSelector = (state) => (
+    stateSelector(state)['currentOperation']['type'] === 'generatingNewReport' && stateSelector(state)['currentOperation']['status'] === 'start'
+)
+export const isDeletingReportSelector = (state) => (
+    stateSelector(state)['currentOperation']['type'] === 'deletingReport' && stateSelector(state)['currentOperation']['status'] === 'start'
+)
 
 
 /**
@@ -109,6 +145,26 @@ export const addNewReport = (data, onSuccess) => {
     }
 }
 
+export const deleteReport = (reportId) => {
+    return (dispatch) => {
+        dispatch({ type: DELETE_REPORT_START })
+        deleteReportService(reportId)
+            .then(all => {
+                dispatch({
+                    type: DELETE_REPORT_SUCCESS,
+                    payload: all
+                })
+                fetchAllReports()(dispatch)
+            })
+            .catch(error => {
+                dispatch({
+                    type: DELETE_REPORT_FAILURE,
+                    payload: error
+                })
+            });
+    }
+}
+
 
 /**
  *   Side Effects
@@ -133,4 +189,8 @@ export function addNewReportService (params) {
         .then(function (response) {
             return response.data;
         })
+}
+
+export function deleteReportService (reportId) {
+    return axios.delete(`/Reports/${reportId}`)
 }

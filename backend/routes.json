@@ -1,5 +1,4 @@
 {
     "/api/*": "/$1",
-    "/Templates/new_template_data": "/newTemplateData",
-    "/Reports/*": "/getReportData"
+    "/Templates/new_template_data": "/newTemplateData"
 }

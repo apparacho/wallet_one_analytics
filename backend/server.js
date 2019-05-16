@@ -17,12 +17,16 @@ server.get('/echo', (req, res) => {
     res.jsonp(req.query)
 })
 
-server.use(jsonServer.rewriter(JSON.parse(routesJson)))
-// server.use(jsonServer.rewriter({
-//     '/api/*': '/$1',
-//     '/Templates/new_template_data': '/newTemplateData',
-//     '/Reports/*': '/getReportData'
-// }))
+// server.use(jsonServer.rewriter(JSON.parse(routesJson)))
+server.use(jsonServer.rewriter({
+    '/api/*': '/$1',
+    '/Templates/new_template_data': '/newTemplateData'
+}))
+
+server.get('/Reports/:reportId', (req, res) => {
+    const dbFile = fs.readFileSync("backend/db.json", "utf8");
+    return res.jsonp(JSON.parse(dbFile)['getReportData'])
+})
 
 // server.use(bodyParser.json());
 // server.post('/Templates', (req, res) => {

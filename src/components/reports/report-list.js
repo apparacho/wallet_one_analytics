@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import ReportTable from './reports-table'
 import { connect } from 'react-redux'
-import { reportListSelector, fetchAllReports } from '../../ducks/reports'
-import { Button } from 'antd'
+import { reportListSelector, fetchAllReports, deleteReport } from '../../ducks/reports'
+import { Modal, Button } from 'antd'
 import AddReportModal from './add-report-modal'
+
+const confirm = Modal.confirm;
 
 class ReportList extends Component {
     static propTypes = {}
@@ -24,6 +26,24 @@ class ReportList extends Component {
          this.setState({ isVisibleModal: false })
     }
 
+    onDeleteReport = (row) => {
+        this.showDeleteReportConfirm(row.id)
+    }
+
+    showDeleteReportConfirm = (reportId) => {
+        const me = this;
+        confirm({
+            title: 'Удаление отчета',
+            content: 'Вы действительно ходите удалить отчет?',
+            okText: 'Ок',
+            cancelText: 'Отмена',
+            onOk() {
+                me.props.deleteReport(reportId);
+            },
+            onCancel() {},
+        });
+    }
+
     render() {
         return (
             <div>
@@ -32,7 +52,7 @@ class ReportList extends Component {
                     <span style={{ fontSize: '18px', lineHeight: '32px' }} > Список отчетов </span>
                     <Button style={{ float: 'right' }} onClick={this.showModal}> Сгенерировать отчет </Button>
                 </div>
-                <ReportTable tableData={this.props.reportList} />
+                <ReportTable tableData={this.props.reportList} onDeleteRow={this.onDeleteReport} />
 
                 <AddReportModal
                     visible={this.state.isVisibleModal}
@@ -48,5 +68,5 @@ export default connect(
     (state) => ({
         reportList: reportListSelector(state)
     }),
-    { fetchAllReports }
+    { fetchAllReports, deleteReport }
 )(ReportList)
