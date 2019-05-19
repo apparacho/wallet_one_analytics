@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Formik, Form, Field, FieldArray } from 'formik'
 import ExclamationHelper from '../common/datadisplay/exclamationhelper/exclamation-helper'
@@ -14,7 +14,6 @@ import {
 } from "../../ducks/templates";
 import {connect} from "react-redux";
 
-import FormField from '../common/form/formik/form-field'
 import FormArrayField from '../common/form/formik/form-array-field'
 import FormikAntdDatepicker from '../common/form/formik/antd/datepicker/formik-antd-datepicker'
 import { momentDateTimeFormat, momentDateFormat } from '../common/form/formik/antd/datepicker/date-tiem-formats'
