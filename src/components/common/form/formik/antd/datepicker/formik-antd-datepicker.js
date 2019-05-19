@@ -28,11 +28,10 @@ class FormikAntdDatepicker extends Component {
             <Field
                 name={fieldName}
                 render={({field, form}) => (
-                    console.log(field.value) ||
                     <DatePicker
                         defaultValue={moment(new Date(), momentDF)}
                         format={antdDF}
-                        onChange={(dateVal, dateString) => console.log(dateVal, dateString) || form.setFieldValue(fieldName, dateString)}
+                        onChange={(dateVal, dateString) => form.setFieldValue(fieldName, dateString)}
                         onBlur={() => form.setFieldTouched(fieldName, true)}
                         style={{width: 200}}
                         value={field.value ? moment(field.value, momentDF) : field.value}

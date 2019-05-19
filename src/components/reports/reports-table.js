@@ -19,7 +19,12 @@ const getColumns = (onDeleteRow) => [
     },
     {
         title: '',
-        render: (row) => <i style={{ fontSize: 20, color: '#cd0505', cursor: 'pointer' }} className="fa fa-remove" onClick={() => onDeleteRow(row)}></i>
+        render: (row) => <i
+                style={{ fontSize: 20, color: '#cd0505', cursor: 'pointer' }}
+                className="fa fa-remove"
+                onClick={() => onDeleteRow(row)}
+                title="Удалить отчет"
+            ></i>
     }
 ];
 

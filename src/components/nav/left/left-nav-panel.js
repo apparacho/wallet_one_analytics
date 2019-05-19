@@ -9,7 +9,6 @@ class LeftNavPanel extends Component {
     }
 
     render() {
-        console.log(this.props.location.pathname)
         return (
             <aside className="main-sidebar">
                 <section className="sidebar">

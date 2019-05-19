@@ -104,11 +104,11 @@ class TemplateEditForm extends PureComponent {
     }
 
     handleSubmit = (values) => {
-        console.log(Object.assign({}, values, {
-            templateColumns: this.props.templateColumnsSelectData.filter(column => values.templateColumns.indexOf(column.name) !== -1),
-            filters: values.templateColumnFilters.map(filter => ({...filter, column: this.props.templateColumnsSelectData.filter(column => column.name === filter.column)[0]})),
-            aggregationFunctions: values.templateColumnAggregationFunctions.map(aggfunc => ({...aggfunc, column: this.props.templateColumnsSelectData.filter(column => column.name === aggfunc.column)[0]})),
-        }))
+        // console.log(Object.assign({}, values, {
+        //     templateColumns: this.props.templateColumnsSelectData.filter(column => values.templateColumns.indexOf(column.name) !== -1),
+        //     filters: values.templateColumnFilters.map(filter => ({...filter, column: this.props.templateColumnsSelectData.filter(column => column.name === filter.column)[0]})),
+        //     aggregationFunctions: values.templateColumnAggregationFunctions.map(aggfunc => ({...aggfunc, column: this.props.templateColumnsSelectData.filter(column => column.name === aggfunc.column)[0]})),
+        // }))
 
         this.props.addNewTemplate(Object.assign({}, values, {
             templateColumns: this.props.templateColumnsSelectData.filter(column => values.templateColumns.indexOf(column.name) !== -1),
@@ -122,11 +122,10 @@ class TemplateEditForm extends PureComponent {
         const onFilterColumnChange = (formikProps, index, dataSourceName, modelFieldName) => val => {
             const columnsData = this.props.templateColumnsSelectData,
                 oldVal = formikProps.values[dataSourceName][index][modelFieldName],
-                getColumnDateTypeByValue = (val) => console.log(columnsData.filter(col => col.name === val)[0].dataType) || columnsData.filter(col => col.name === val)[0].dataType,
+                getColumnDateTypeByValue = (val) => columnsData.filter(col => col.name === val)[0].dataType,
                 newValDataType = getColumnDateTypeByValue(val)
             // if (val && oldVal && oldVal !== val && getColumnDateTypeByValue(oldVal) !== newValDataType) {
             if (val && oldVal !== val) {
-                    console.log(newValDataType, typeof newValDataType)
                 formikProps.setFieldValue(`${dataSourceName}[${index}].boundValue`,
                     newValDataType >= 2 ? moment(new Date(), (newValDataType === 3 ? momentDateTimeFormat : momentDateFormat)) : '' )
             }

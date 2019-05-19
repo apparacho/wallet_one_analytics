@@ -31,14 +31,13 @@ class ReportList extends Component {
     }
 
     showDeleteReportConfirm = (reportId) => {
-        const me = this;
         confirm({
             title: 'Удаление отчета',
             content: 'Вы действительно ходите удалить отчет?',
             okText: 'Ок',
             cancelText: 'Отмена',
-            onOk() {
-                me.props.deleteReport(reportId);
+            onOk: () => {
+                this.props.deleteReport(reportId);
             },
             onCancel() {},
         });

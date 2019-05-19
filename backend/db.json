@@ -24,9 +24,9 @@
       "id": "HIRqLBy"
     },
     {
-      "name": "ttt8_8",
-      "templateId": "imHqh7m",
-      "id": "oBTy2Rz"
+      "name": "ttt_555",
+      "templateId": "QLGVOqx",
+      "id": "B1YDxVH"
     }
   ],
   "getReportData": {
@@ -444,66 +444,6 @@
       ],
       "templateColumnOperations": [],
       "id": "imHqh7m"
-    },
-    {
-      "name": "test template 10",
-      "templateType": 0,
-      "templateColumns": [
-        {
-          "name": "PointId",
-          "humanReadableName": "PointId",
-          "dataType": "0"
-        },
-        {
-          "name": "DealNumber",
-          "humanReadableName": "DealNumber",
-          "dataType": "0"
-        },
-        {
-          "name": "PointTitle",
-          "humanReadableName": "PointTitle",
-          "dataType": "0"
-        }
-      ],
-      "filters": [
-        {
-          "column": {
-            "name": "PointId",
-            "humanReadableName": "PointId",
-            "dataType": "0"
-          },
-          "operation": 0,
-          "boundValue": "322131"
-        },
-        {
-          "column": {
-            "name": "PointId",
-            "humanReadableName": "PointId",
-            "dataType": "0"
-          },
-          "operation": 5,
-          "boundValue": "3423423423"
-        }
-      ],
-      "aggregationFunctions": [],
-      "reportingSystem": null,
-      "user": null,
-      "reportingSystemId": "48a96857-0c53-431e-886a-886b65b81e98",
-      "userId": "bd504b3f-81fe-42ca-b966-675515b07af9",
-      "templateColumnFilters": [
-        {
-          "column": "PointId",
-          "operation": 0,
-          "boundValue": "322131"
-        },
-        {
-          "column": "PointId",
-          "operation": 5,
-          "boundValue": "3423423423"
-        }
-      ],
-      "templateColumnOperations": [],
-      "id": "6saB2dK"
     }
   ],
   "newTemplateData": {
