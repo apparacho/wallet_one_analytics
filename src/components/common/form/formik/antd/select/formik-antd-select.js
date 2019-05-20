@@ -37,7 +37,7 @@ class FormikAntdSelect extends Component {
                         {...antdComponentProps}
                         name={dataIndex}
                         value={formikProps.values[dataIndex]}
-                        onChange={(val) => formikProps.setFieldValue(dataIndex, val)}
+                        onChange={(val) => {formikProps.setFieldValue(dataIndex, val)}}
                         onBlur={() => formikProps.setFieldTouched(dataIndex, true)}
                         style={style}
                         className={'wo-select' + (formikProps.errors[dataIndex] && formikProps.touched[dataIndex] ? ' error' : '')}

@@ -120,6 +120,11 @@ class TemplateEditForm extends PureComponent {
         }))
     }
 
+    onTemplateColumnsDeselect = formikProps => val => {
+        formikProps.setFieldValue('templateColumnAggregationFunctions', formikProps.values.templateColumnAggregationFunctions.filter(item => item.column !== val));
+        formikProps.setFieldValue('templateColumnFilters', formikProps.values.templateColumnFilters.filter(item => item.column !== val));
+    }
+
     render() {
 
         const getDataType = (formikProps, index) => {
@@ -206,6 +211,7 @@ class TemplateEditForm extends PureComponent {
                                 nameField="humanReadableName"
                                 valueField="name"
                                 itemKey="name"
+                                onDeselect={this.onTemplateColumnsDeselect(props)}
                                 mode="multiple"
                                 style={{ width: 400 }}
                             />

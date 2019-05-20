@@ -526,23 +526,8 @@
       "templateType": 0,
       "templateColumns": [
         {
-          "name": "DealSum",
-          "humanReadableName": "DealSum",
-          "dataType": "1"
-        },
-        {
           "name": "PointId",
           "humanReadableName": "PointId",
-          "dataType": "0"
-        },
-        {
-          "name": "DealState",
-          "humanReadableName": "DealState",
-          "dataType": "0"
-        },
-        {
-          "name": "LicenseId",
-          "humanReadableName": "LicenseId",
           "dataType": "0"
         },
         {
@@ -609,21 +594,12 @@
       "filters": [
         {
           "column": {
-            "name": "DealSum",
-            "humanReadableName": "DealSum",
-            "dataType": "1"
-          },
-          "operation": 0,
-          "boundValue": "111"
-        },
-        {
-          "column": {
-            "name": "DealState",
-            "humanReadableName": "DealState",
+            "name": "EmployeeEmail",
+            "humanReadableName": "EmployeeEmail",
             "dataType": "0"
           },
           "operation": 5,
-          "boundValue": "rwerew"
+          "boundValue": "111"
         }
       ],
       "aggregationFunctions": [
@@ -653,14 +629,9 @@
       "id": "8W1CAz_",
       "templateColumnFilters": [
         {
-          "column": "DealSum",
-          "operation": 0,
-          "boundValue": "111"
-        },
-        {
-          "column": "DealState",
+          "column": "EmployeeEmail",
           "operation": 5,
-          "boundValue": "rwerew"
+          "boundValue": "111"
         }
       ],
       "templateColumnAggregationFunctions": [
