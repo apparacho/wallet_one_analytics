@@ -7,12 +7,6 @@ import moment from 'moment'
 import FormikAntdSelect from '../common/form/formik/antd/select/formik-antd-select'
 import FormikAntdInput from '../common/form/formik/antd/input/formik-antd-input'
 import * as Yup from 'yup'
-import {
-    fetchNewTemplateCreationData, addNewTemplate,
-    reportingSystemsDataSelector,
-    templateColumnsDataSelector, templateTypesDataSelector, dataTypeDescriptionsSelector
-} from "../../ducks/templates";
-import {connect} from "react-redux";
 
 import FormArrayField from '../common/form/formik/form-array-field'
 import FormikAntdDatepicker from '../common/form/formik/antd/datepicker/formik-antd-datepicker'
@@ -26,7 +20,7 @@ const fieldRequiredMessage = 'это поле обязательно для за
 
 const addTemplateValidationSchema = Yup.object().shape({
     name: Yup.string().required(fieldRequiredMessage),
-    templateType: Yup.string().required(fieldRequiredMessage),
+    templateType: Yup.number().required(fieldRequiredMessage),
     reportingSystemId: Yup.string().required(fieldRequiredMessage),
     templateColumns: Yup.array().required(fieldRequiredMessage),
     templateColumnFilters: Yup.array().of(Yup.object().shape({
@@ -71,7 +65,7 @@ class TemplateEditForm extends PureComponent {
 
     static propTypes = {
         name: PropTypes.string,
-        templateType: PropTypes.string,
+        templateType: PropTypes.number,
         reportingSystemId: PropTypes.string,
         templateColumns: PropTypes.array,
         templateColumnFilters: PropTypes.array,
@@ -80,11 +74,16 @@ class TemplateEditForm extends PureComponent {
         templateTypesSelectData: PropTypes.array,
         reportingSystemsSelectData: PropTypes.array,
         templateColumnsSelectData: PropTypes.array,
+
+        onSubmit: PropTypes.func,
+        submitBtnText: PropTypes.string,
+
+        templateId: PropTypes.string
     }
 
     static defaultProps = {
         name: '',
-        templateType: '',
+        templateType: null,
         reportingSystemId: '',
         templateColumns: [],
         templateColumnFilters: [],
@@ -92,7 +91,10 @@ class TemplateEditForm extends PureComponent {
 
         templateTypesSelectData: [],
         reportingSystemsSelectData: [],
-        templateColumnsSelectData: []
+        templateColumnsSelectData: [],
+        submitBtnText: 'Сохранить',
+
+        templateId: ''
     }
 
     componentDidMount() {
@@ -104,13 +106,14 @@ class TemplateEditForm extends PureComponent {
     }
 
     handleSubmit = (values) => {
+        // console.log(values);
         // console.log(Object.assign({}, values, {
         //     templateColumns: this.props.templateColumnsSelectData.filter(column => values.templateColumns.indexOf(column.name) !== -1),
         //     filters: values.templateColumnFilters.map(filter => ({...filter, column: this.props.templateColumnsSelectData.filter(column => column.name === filter.column)[0]})),
         //     aggregationFunctions: values.templateColumnAggregationFunctions.map(aggfunc => ({...aggfunc, column: this.props.templateColumnsSelectData.filter(column => column.name === aggfunc.column)[0]})),
         // }))
 
-        this.props.addNewTemplate(Object.assign({}, values, {
+        this.props.onSubmit && this.props.onSubmit(Object.assign({}, values, {
             templateColumns: this.props.templateColumnsSelectData.filter(column => values.templateColumns.indexOf(column.name) !== -1),
             filters: values.templateColumnFilters.map(filter => ({...filter, column: this.props.templateColumnsSelectData.filter(column => column.name === filter.column)[0]})),
             aggregationFunctions: values.templateColumnAggregationFunctions.map(aggfunc => ({...aggfunc, column: this.props.templateColumnsSelectData.filter(column => column.name === aggfunc.column)[0]}))
@@ -118,6 +121,13 @@ class TemplateEditForm extends PureComponent {
     }
 
     render() {
+
+        const getDataType = (formikProps, index) => {
+            const col = formikProps.values['templateColumnFilters'][index]['column'] &&
+                this.props.templateColumnsSelectData.filter(col => col.name === formikProps.values['templateColumnFilters'][index]['column'])[0];
+            return col ? col.dataType : '';
+        }
+
 
         const onFilterColumnChange = (formikProps, index, dataSourceName, modelFieldName) => val => {
             const columnsData = this.props.templateColumnsSelectData,
@@ -137,6 +147,7 @@ class TemplateEditForm extends PureComponent {
         return (
             <Formik key={Date.now()}
                 initialValues={{
+                    id: this.props.templateId,
                     name: this.props.name,
                     templateType: this.props.templateType,
                     reportingSystemId: this.props.reportingSystemId,
@@ -291,7 +302,7 @@ class TemplateEditForm extends PureComponent {
 
                                                 <td>
                                                     <MultiTypeValueInput
-                                                        dataType={props.values['templateColumnFilters'][index]['column'] && this.props.templateColumnsSelectData.filter(col => col.name === props.values['templateColumnFilters'][index]['column'])[0].dataType}
+                                                        dataType={getDataType(props, index)}
                                                         dataSourceName="templateColumnFilters"
                                                         modelFieldName="boundValue"
                                                         index={index}
@@ -465,7 +476,7 @@ class TemplateEditForm extends PureComponent {
                             className="login-form-button"
                             disabled={props.isSubmitting || !props.isValid || !props.dirty}
                         >
-                            Сгенерировать шаблон
+                            {this.props.submitBtnText}
                         </Button>
                     </Form>
                 )}
@@ -474,12 +485,4 @@ class TemplateEditForm extends PureComponent {
     }
 }
 
-export default connect(
-    (state) => ({
-        templateTypesSelectData: templateTypesDataSelector(state),
-        reportingSystemsSelectData: reportingSystemsDataSelector(state),
-        templateColumnsSelectData: templateColumnsDataSelector(state),
-        dataTypeDescriptions: dataTypeDescriptionsSelector(state)
-    }),
-    { fetchNewTemplateCreationData, addNewTemplate }
-)(TemplateEditForm)
+export default  TemplateEditForm

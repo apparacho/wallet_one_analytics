@@ -28,6 +28,7 @@ class FormikAntdInput extends Component {
                         onChange={formikProps.handleChange}
                         onBlur={formikProps.handleBlur}
                         style={style}
+                        value={formikProps.values[dataIndex]}
                         className={'wo-input' + (formikProps.errors[dataIndex] && formikProps.touched[dataIndex] ? ' error' : '')}
                     />
                 </div>

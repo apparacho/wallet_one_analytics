@@ -368,7 +368,7 @@
     },
     {
       "name": "test template 5",
-      "templateType": 0,
+      "templateType": "0",
       "templateColumns": [
         {
           "name": "ReceiverMiddleName",
@@ -444,6 +444,337 @@
       ],
       "templateColumnOperations": [],
       "id": "imHqh7m"
+    },
+    {
+      "name": "test template 12",
+      "templateType": 0,
+      "templateColumns": [
+        {
+          "name": "DealSum",
+          "humanReadableName": "DealSum",
+          "dataType": "1"
+        },
+        {
+          "name": "PointId",
+          "humanReadableName": "PointId",
+          "dataType": "0"
+        },
+        {
+          "name": "DealState",
+          "humanReadableName": "DealState",
+          "dataType": "0"
+        }
+      ],
+      "filters": [
+        {
+          "column": {
+            "name": "DealSum",
+            "humanReadableName": "DealSum",
+            "dataType": "1"
+          },
+          "operation": 1,
+          "boundValue": "111"
+        },
+        {
+          "column": {
+            "name": "PointId",
+            "humanReadableName": "PointId",
+            "dataType": "0"
+          },
+          "operation": 0,
+          "boundValue": "1"
+        }
+      ],
+      "aggregationFunctions": [
+        {
+          "column": {
+            "name": "DealState",
+            "humanReadableName": "DealState",
+            "dataType": "0"
+          },
+          "type": 1,
+          "name": "222"
+        }
+      ],
+      "reportingSystem": null,
+      "user": null,
+      "reportingSystemId": "48a96857-0c53-431e-886a-886b65b81e98",
+      "userId": "bd504b3f-81fe-42ca-b966-675515b07af9",
+      "templateColumnFilters": [
+        {
+          "column": "DealSum",
+          "operation": 1,
+          "boundValue": "111"
+        },
+        {
+          "column": "PointId",
+          "operation": 0,
+          "boundValue": "1"
+        }
+      ],
+      "templateColumnAggregationFunctions": [
+        {
+          "column": "DealState",
+          "type": 1,
+          "name": "222"
+        }
+      ],
+      "id": "PatUvPN"
+    },
+    {
+      "name": "test template 13",
+      "templateType": 0,
+      "templateColumns": [
+        {
+          "name": "DealSum",
+          "humanReadableName": "DealSum",
+          "dataType": "1"
+        },
+        {
+          "name": "PointId",
+          "humanReadableName": "PointId",
+          "dataType": "0"
+        },
+        {
+          "name": "DealState",
+          "humanReadableName": "DealState",
+          "dataType": "0"
+        },
+        {
+          "name": "LicenseId",
+          "humanReadableName": "LicenseId",
+          "dataType": "0"
+        },
+        {
+          "name": "DealNumber",
+          "humanReadableName": "DealNumber",
+          "dataType": "0"
+        },
+        {
+          "name": "LicenseeId",
+          "humanReadableName": "LicenseeId",
+          "dataType": "0"
+        },
+        {
+          "name": "PointTitle",
+          "humanReadableName": "PointTitle",
+          "dataType": "0"
+        },
+        {
+          "name": "ProviderId",
+          "humanReadableName": "ProviderId",
+          "dataType": "0"
+        },
+        {
+          "name": "LCategoryId",
+          "humanReadableName": "LCategoryId",
+          "dataType": "0"
+        },
+        {
+          "name": "LicenseType",
+          "humanReadableName": "LicenseType",
+          "dataType": "0"
+        },
+        {
+          "name": "PointActive",
+          "humanReadableName": "PointActive",
+          "dataType": "1"
+        },
+        {
+          "name": "EmployeeName",
+          "humanReadableName": "EmployeeName",
+          "dataType": "0"
+        },
+        {
+          "name": "ProviderName",
+          "humanReadableName": "ProviderName",
+          "dataType": "0"
+        },
+        {
+          "name": "ReceiverName",
+          "humanReadableName": "ReceiverName",
+          "dataType": "0"
+        },
+        {
+          "name": "DealPaymentId",
+          "humanReadableName": "DealPaymentId",
+          "dataType": "0"
+        },
+        {
+          "name": "EmployeeEmail",
+          "humanReadableName": "EmployeeEmail",
+          "dataType": "0"
+        }
+      ],
+      "filters": [
+        {
+          "column": {
+            "name": "DealSum",
+            "humanReadableName": "DealSum",
+            "dataType": "1"
+          },
+          "operation": 0,
+          "boundValue": "111"
+        },
+        {
+          "column": {
+            "name": "DealState",
+            "humanReadableName": "DealState",
+            "dataType": "0"
+          },
+          "operation": 5,
+          "boundValue": "rwerew"
+        }
+      ],
+      "aggregationFunctions": [
+        {
+          "column": {
+            "name": "PointId",
+            "humanReadableName": "PointId",
+            "dataType": "0"
+          },
+          "type": 1,
+          "name": "222"
+        },
+        {
+          "column": {
+            "name": "DealNumber",
+            "humanReadableName": "DealNumber",
+            "dataType": "0"
+          },
+          "type": 1,
+          "name": "123"
+        }
+      ],
+      "reportingSystem": null,
+      "user": null,
+      "reportingSystemId": "48a96857-0c53-431e-886a-886b65b81e98",
+      "userId": "bd504b3f-81fe-42ca-b966-675515b07af9",
+      "id": "8W1CAz_",
+      "templateColumnFilters": [
+        {
+          "column": "DealSum",
+          "operation": 0,
+          "boundValue": "111"
+        },
+        {
+          "column": "DealState",
+          "operation": 5,
+          "boundValue": "rwerew"
+        }
+      ],
+      "templateColumnAggregationFunctions": [
+        {
+          "column": "PointId",
+          "type": 1,
+          "name": "222"
+        },
+        {
+          "column": "DealNumber",
+          "type": 1,
+          "name": "123"
+        }
+      ]
+    },
+    {
+      "name": "test template 15",
+      "templateType": 0,
+      "templateColumns": [
+        {
+          "name": "DealSum",
+          "humanReadableName": "DealSum",
+          "dataType": "1"
+        },
+        {
+          "name": "PointId",
+          "humanReadableName": "PointId",
+          "dataType": "0"
+        },
+        {
+          "name": "DealState",
+          "humanReadableName": "DealState",
+          "dataType": "0"
+        },
+        {
+          "name": "LicenseId",
+          "humanReadableName": "LicenseId",
+          "dataType": "0"
+        },
+        {
+          "name": "DealNumber",
+          "humanReadableName": "DealNumber",
+          "dataType": "0"
+        }
+      ],
+      "filters": [
+        {
+          "column": {
+            "name": "PointId",
+            "humanReadableName": "PointId",
+            "dataType": "0"
+          },
+          "operation": 0,
+          "boundValue": "123"
+        },
+        {
+          "column": {
+            "name": "LicenseId",
+            "humanReadableName": "LicenseId",
+            "dataType": "0"
+          },
+          "operation": 5,
+          "boundValue": "321"
+        }
+      ],
+      "aggregationFunctions": [
+        {
+          "column": {
+            "name": "PointId",
+            "humanReadableName": "PointId",
+            "dataType": "0"
+          },
+          "type": 1,
+          "name": "222"
+        },
+        {
+          "column": {
+            "name": "DealNumber",
+            "humanReadableName": "DealNumber",
+            "dataType": "0"
+          },
+          "type": 1,
+          "name": "333"
+        }
+      ],
+      "reportingSystem": null,
+      "user": null,
+      "reportingSystemId": "48a96857-0c53-431e-886a-886b65b81e98",
+      "userId": "bd504b3f-81fe-42ca-b966-675515b07af9",
+      "id": "qQYoBjD",
+      "templateColumnFilters": [
+        {
+          "column": "PointId",
+          "operation": 0,
+          "boundValue": "123"
+        },
+        {
+          "column": "LicenseId",
+          "operation": 5,
+          "boundValue": "321"
+        }
+      ],
+      "templateColumnAggregationFunctions": [
+        {
+          "column": "PointId",
+          "type": 1,
+          "name": "222"
+        },
+        {
+          "column": "DealNumber",
+          "type": 1,
+          "name": "333"
+        }
+      ]
     }
   ],
   "newTemplateData": {

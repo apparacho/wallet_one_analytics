@@ -1,20 +1,45 @@
 import React, { Component } from 'react'
 import TemplateEditForm from './template-edit-form'
-import { successfulTemplateAddSelector } from "../../ducks/templates"
+import {
+    successfulTemplateAddSelector,
+    fetchTemplateById,
+    currentTemplateFormDataSelector,
+    dataTypeDescriptionsSelector,
+    templateTypesDataSelector,
+    templateColumnsDataSelector,
+    reportingSystemsDataSelector,
+    addNewTemplate, fetchNewTemplateCreationData, editExistTemplate
+} from "../../ducks/templates"
 import { Redirect } from 'react-router-dom'
 import {connect} from "react-redux"
 
 class TemplateEditPage extends Component {
     static propTypes = {}
 
+    componentDidMount() {
+        this.props.fetchNewTemplateCreationData()
+        const templateId = this.props.match.params.templateId
+        templateId && this.props.fetchTemplateById(templateId)
+    }
+
     render() {
 
-        return this.props.successfulTemplateAdd ? <Redirect to="/templates" /> :
+        const { currentTemplateFormData, successfulTemplateAdd, match, ...rest } = this.props,
+            templateId = match.params.templateId;
+
+        return successfulTemplateAdd ? <Redirect to="/templates" /> :
                 <div style={{ marginTop: 20 }}>
-                    <h4> Создание нового шаблона </h4>
+                    <h4> {templateId ? `Редактирование шаблона "${currentTemplateFormData.name}"` : 'Создание нового шаблона'} </h4>
 
                     <div style={{ marginTop: 20 }}>
-                        <TemplateEditForm />
+                        <TemplateEditForm
+                            {...currentTemplateFormData}
+                            {...rest}
+                            action={templateId ? 'edit' : 'add'}
+                            onSubmit={templateId ? this.props.editExistTemplate : this.props.addNewTemplate}
+                            submitBtnText={templateId ? 'Сохранить изменения' : 'Сгенерировать шаблон'}
+                            templateId={templateId}
+                        />
                     </div>
                 </div>
     }
@@ -22,7 +47,13 @@ class TemplateEditPage extends Component {
 
 export default connect(
     (state) => ({
-        successfulTemplateAdd: successfulTemplateAddSelector(state)
+        successfulTemplateAdd: successfulTemplateAddSelector(state),
+        currentTemplateFormData: currentTemplateFormDataSelector(state),
+
+        templateTypesSelectData: templateTypesDataSelector(state),
+        reportingSystemsSelectData: reportingSystemsDataSelector(state),
+        templateColumnsSelectData: templateColumnsDataSelector(state),
+        dataTypeDescriptions: dataTypeDescriptionsSelector(state)
     }),
-    null
+    { fetchTemplateById, fetchNewTemplateCreationData, addNewTemplate, editExistTemplate }
 )(TemplateEditPage)

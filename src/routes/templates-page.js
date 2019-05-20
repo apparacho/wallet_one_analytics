@@ -14,7 +14,7 @@ class TemplatesPage extends Component {
                 </section>
                 <section className="content">
                     <Switch>
-                        <Route path="/templates/edit" component={TemplateEditPage} />
+                        <Route exact path={["/templates/edit", "/templates/edit/:templateId"]} component={TemplateEditPage} />
                         <Route path="/templates" component={TemplateListPage} />
                         <Redirect to="/templates" />
                     </Switch>

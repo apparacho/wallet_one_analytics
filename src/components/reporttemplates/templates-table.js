@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Tag } from 'antd';
 import PropTypes from 'prop-types'
+import { NavLink } from 'react-router-dom'
 
 const getColumns = (onDeleteRow) => [
     {
@@ -11,6 +12,11 @@ const getColumns = (onDeleteRow) => [
         title: 'Столбцы',
         dataIndex: 'templateColumns',
         render: columns => columns.map(column => <Tag color='geekblue' key={column.name}> {column.humanReadableName} </Tag>)
+    },
+    {
+        title: '',
+        dataIndex: 'id',
+        render: templateId => <NavLink to={'/templates/edit/' + templateId}> <i style={{ fontSize: 20 }} className="fa fa-eye"></i></NavLink>
     },
     {
         title: '',
